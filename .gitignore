@@ -36,6 +36,14 @@ yarn-error.log*
 # vercel
 .vercel
 
+# AI Tools
+.claude/
+.windsurf/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# database
+.postgres-data
+/app/generated/prisma

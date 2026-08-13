@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: ira-barber-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 17284513@@@master_dev
+      POSTGRES_DB: ira-barber
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+volumes:
+  postgres-data:
