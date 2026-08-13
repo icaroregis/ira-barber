@@ -20,6 +20,22 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Configurando o Prisma
+
+```bash
+# 1. Instala a CLI do Prisma como ferramenta de desenvolvimento (nao vai para o codigo final)
+pnpm add -D prisma
+
+# 2. Instala o client que sera usado no codigo para consultar o banco (vai para producao)
+pnpm add @prisma/client
+
+# 3. Cria a estrutura inicial do Prisma, como a pasta prisma e o arquivo .env
+pnpm dlx prisma init --datasource-provider postgresql
+
+# 4. Cria e aplica a primeira migration no banco com base no schema atual
+pnpm dlx prisma migrate dev --name init
+```
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

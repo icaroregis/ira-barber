@@ -11,3 +11,50 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+// Relação de um para muitos (1:N) => Um usuário pode ter muitas reservas, mas cada reserva está associada a um usuário)
+model User {
+  id        String    @id @default(uuid())
+  name      String
+  email     String    @unique
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  bookings  Booking[]
+}
+
+// Relação de um para muitos (1:N) => Um barbearia pode ter muitos serviços, mas um serviço está associado a um barbearia
+model Barbershop {
+  id          String               @id @default(uuid())
+  name        String
+  address     String
+  phones      String[]
+  description String               @default("")
+  imageUrl    String               @default("")
+  createdAt   DateTime             @default(now())
+  updatedAt   DateTime             @updatedAt
+  services    BarbershopServices[]
+}
+
+model BarbershopServices {
+  id           String     @id @default(uuid())
+  name         String
+  description  String     @default("")
+  imageUrl     String     @default("")
+  price        Decimal    @default(0) @db.Decimal(10, 2)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  barbershopId String
+  barbershop   Barbershop @relation(fields: [barbershopId], references: [id])
+  bookings     Booking[]
+}
+
+model Booking {
+  id        String             @id @default(uuid())
+  userId    String
+  user      User               @relation(fields: [userId], references: [id])
+  serviceId String
+  service   BarbershopServices @relation(fields: [serviceId], references: [id])
+  date      DateTime           @default(now())
+  createdAt DateTime           @default(now())
+  updatedAt DateTime           @updatedAt
+}
