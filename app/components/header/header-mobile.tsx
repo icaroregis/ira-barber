@@ -8,8 +8,8 @@ export default function HeaderMobile() {
     <Card className="border-border bg-background rounded-none border-x-0 border-t-0 border-b border-solid py-0 ring-0">
       <CardContent className="flex flex-row items-center justify-between p-5">
         <Image
-          src="/logo.svg"
-          alt="FSW Barber Logo"
+          src="/logo.jpeg"
+          alt="IRA Barber Logo"
           width={130}
           height={22}
           loading="eager"
