@@ -13,7 +13,9 @@ export default function HeaderDesktop() {
           width={130}
           height={22}
           loading="eager"
+          style={{ width: "auto", height: "auto" }}
         />
+
         <div className="flex flex-row items-center gap-6">
           <Button
             variant="outline"

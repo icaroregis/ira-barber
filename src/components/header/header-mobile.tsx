@@ -13,6 +13,7 @@ export default function HeaderMobile() {
           width={130}
           height={22}
           loading="eager"
+          style={{ width: "auto", height: "auto" }}
         />
         <Button variant="outline" size="icon" className="h-10 w-10 rounded-lg">
           <MenuIcon size={20} />

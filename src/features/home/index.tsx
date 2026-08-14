@@ -70,6 +70,38 @@ export default function Home() {
           Sobrancelha
         </Button>
       </div>
+
+      {/* BANNER */}
+      <div className="px-5 pt-6">
+        <div className="relative h-[150px] w-full overflow-hidden rounded-xl bg-[#221C3D]">
+          {/* O container interno limita os elementos para não vazarem */}
+          <div className="absolute inset-0">
+            {/* Imagem do Banner - Posicionada à direita */}
+            <div className="absolute top-[-25px] -right-5 h-[220px] w-[220px]">
+              <Image
+                src="/banner-image.png"
+                alt="Agende nos melhores com FSW Barber"
+                fill
+                sizes="220px"
+                className="object-contain"
+              />
+            </div>
+
+            {/* Textos - Posicionados à esquerda */}
+            <div className="absolute top-1/2 left-6 flex -translate-y-1/2 flex-col">
+              <h2 className="text-[22px] leading-tight font-bold text-white">
+                Agende
+              </h2>
+              <h2 className="text-[22px] leading-tight font-bold text-white">
+                nos melhores
+              </h2>
+              <p className="mt-1 text-sm font-light text-white">
+                com IRA Barber
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
