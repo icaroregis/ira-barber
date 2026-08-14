@@ -13,9 +13,13 @@ import {
 
 interface HomeMobileProps {
   barbershops: RecommendedBarbershop[];
+  popularBarbershops: RecommendedBarbershop[];
 }
 
-export default function HomeMobile({ barbershops }: HomeMobileProps) {
+export default function HomeMobile({
+  barbershops,
+  popularBarbershops,
+}: HomeMobileProps) {
   return (
     <div>
       {/* HEADER */}
@@ -154,6 +158,20 @@ export default function HomeMobile({ barbershops }: HomeMobileProps) {
 
         <div className="flex gap-4 overflow-x-auto [&::-webkit-scrollbar]:hidden">
           {barbershops.map((barbershop) => (
+            <RecommendedBarbershopItem
+              key={barbershop.id}
+              barbershop={barbershop}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* Populares */}
+      <div className="flex flex-col gap-3 px-5 pt-6 pb-6">
+        <h2 className="text-xs font-bold text-[#838896]">POPULARES</h2>
+
+        <div className="flex gap-4 overflow-x-auto [&::-webkit-scrollbar]:hidden">
+          {popularBarbershops.map((barbershop) => (
             <RecommendedBarbershopItem
               key={barbershop.id}
               barbershop={barbershop}
