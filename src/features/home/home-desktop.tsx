@@ -1,4 +1,4 @@
-import Header from "@/src/components/header/header";
+import Header from "@/components/header/header";
 
 export default function HomeDesktop() {
   return (
