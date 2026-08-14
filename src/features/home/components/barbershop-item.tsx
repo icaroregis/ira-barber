@@ -3,15 +3,15 @@ import { StarIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
-export interface RecommendedBarbershop {
+export interface Barbershop {
   id: string;
   name: string;
   address: string;
   imageUrl: string;
 }
 
-interface RecommendedBarbershopItemProps {
-  barbershop: RecommendedBarbershop;
+interface BarbershopItemProps {
+  barbershop: Barbershop;
 }
 
 function normalizeImageUrl(imageUrl: string) {
@@ -19,13 +19,11 @@ function normalizeImageUrl(imageUrl: string) {
   return normalizedImageUrl || "/banner-image.png";
 }
 
-export function RecommendedBarbershopItem({
-  barbershop,
-}: RecommendedBarbershopItemProps) {
+export function BarbershopItem({ barbershop }: BarbershopItemProps) {
   const imageUrl = normalizeImageUrl(barbershop.imageUrl);
 
   return (
-    <Card className="flex w-[167px] min-w-[167px] flex-col rounded-2xl border-[#26272B] bg-[#1A1B1F] py-0">
+    <Card className="flex h-auto w-[167px] min-w-[167px] flex-col rounded-2xl border-[#26272B] bg-[#1A1B1F] py-0 lg:h-[295px] lg:w-[220.8px] lg:min-w-[220.8px]">
       <CardContent className="flex h-full flex-1 flex-col p-0">
         <div className="p-1 pb-2">
           <div className="relative h-[159px] overflow-hidden rounded-2xl">
@@ -33,7 +31,7 @@ export function RecommendedBarbershopItem({
               src={imageUrl}
               alt={barbershop.name}
               fill
-              sizes="159px"
+              sizes="(min-width: 1024px) 221px, 167px"
               className="object-cover"
             />
 

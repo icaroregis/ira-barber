@@ -6,14 +6,11 @@ import { Button } from "@/components/ui/button";
 import Header from "@/components/header/header";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import {
-  RecommendedBarbershopItem,
-  type RecommendedBarbershop,
-} from "./components/mobile/recommended-barbershop-item";
+import { BarbershopItem, type Barbershop } from "./components/barbershop-item";
 
 interface HomeMobileProps {
-  barbershops: RecommendedBarbershop[];
-  popularBarbershops: RecommendedBarbershop[];
+  barbershops: Barbershop[];
+  popularBarbershops: Barbershop[];
 }
 
 export default function HomeMobile({
@@ -158,10 +155,7 @@ export default function HomeMobile({
 
         <div className="flex gap-4 overflow-x-auto [&::-webkit-scrollbar]:hidden">
           {barbershops.map((barbershop) => (
-            <RecommendedBarbershopItem
-              key={barbershop.id}
-              barbershop={barbershop}
-            />
+            <BarbershopItem key={barbershop.id} barbershop={barbershop} />
           ))}
         </div>
       </div>
@@ -172,10 +166,7 @@ export default function HomeMobile({
 
         <div className="flex gap-4 overflow-x-auto [&::-webkit-scrollbar]:hidden">
           {popularBarbershops.map((barbershop) => (
-            <RecommendedBarbershopItem
-              key={barbershop.id}
-              barbershop={barbershop}
-            />
+            <BarbershopItem key={barbershop.id} barbershop={barbershop} />
           ))}
         </div>
       </div>
