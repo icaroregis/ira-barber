@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/header/header";
 import { Card, CardContent } from "@/components/ui/card";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export default function HomeMobile() {
   return (
@@ -121,15 +122,10 @@ export default function HomeMobile() {
               </h3>
 
               <div className="flex flex-row items-center gap-2">
-                <div className="relative h-6 w-6 overflow-hidden rounded-full">
-                  <Image
-                    src="/avatar.png"
-                    alt="Vintage Barber"
-                    fill
-                    className="object-cover"
-                    sizes="24px"
-                  />
-                </div>
+                <Avatar className="h-6 w-6">
+                  <AvatarImage src="/avatar.png" alt="Vintage Barber" />
+                  <AvatarFallback>VB</AvatarFallback>
+                </Avatar>
                 <p className="text-sm font-normal text-white">Vintage Barber</p>
               </div>
             </div>
