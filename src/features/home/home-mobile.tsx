@@ -1,36 +1,21 @@
 import Image from "next/image";
-import { SearchIcon, StarIcon } from "lucide-react";
+import { SearchIcon } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/header/header";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  RecommendedBarbershopItem,
+  type RecommendedBarbershop,
+} from "./components/mobile/recommended-barbershop-item";
 
-const recommendedBarberShops = [
-  {
-    name: "Vintage Barber",
-    address: "Avenida São Sebastião, 357, São Paulo",
-    image: "/barbershops/vintage-barber.png",
-  },
-  {
-    name: "Clássica Cortez",
-    address: "Rua Castro Alves, 331, São Paulo",
-    image: "/barbershops/classica-cortez.png",
-  },
-  {
-    name: "Los Barberos",
-    address: "Rua Sete de Setembro, 428, São Paulo",
-    image: "/barbershops/los-barberos.png",
-  },
-  {
-    name: "Homem Elegante",
-    address: "Rua Projetada, 529, São Paulo",
-    image: "/barbershops/homem-elegante.png",
-  },
-];
+interface HomeMobileProps {
+  barbershops: RecommendedBarbershop[];
+}
 
-export default function HomeMobile() {
+export default function HomeMobile({ barbershops }: HomeMobileProps) {
   return (
     <div>
       {/* HEADER */}
@@ -168,48 +153,11 @@ export default function HomeMobile() {
         <h2 className="text-xs font-bold text-[#838896]">RECOMENDADOS</h2>
 
         <div className="flex gap-4 overflow-x-auto [&::-webkit-scrollbar]:hidden">
-          {recommendedBarberShops.map((barberShop) => (
-            <Card
-              key={barberShop.name}
-              className="w-[167px] min-w-[167px] rounded-2xl border-[#26272B] bg-[#1A1B1F] py-0"
-            >
-              <CardContent className="p-0">
-                <div className="p-1 pb-2">
-                  <div className="relative h-[159px] overflow-hidden rounded-2xl">
-                    <Image
-                      src={barberShop.image}
-                      alt={barberShop.name}
-                      fill
-                      sizes="159px"
-                      className="object-cover"
-                    />
-
-                    <div className="absolute top-1 left-1 flex items-center gap-1 rounded-2xl bg-[rgba(34,28,61,0.7)] px-2.5 py-1 backdrop-blur-[3px]">
-                      <StarIcon
-                        size={12}
-                        className="fill-primary text-primary"
-                      />
-                      <span className="text-xs font-bold text-white">5,0</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex flex-col gap-3 px-3 pb-3">
-                  <div className="flex flex-col gap-1">
-                    <h3 className="text-base font-bold text-white">
-                      {barberShop.name}
-                    </h3>
-                    <p className="text-xs text-[#838896]">
-                      {barberShop.address}
-                    </p>
-                  </div>
-
-                  <Button className="h-auto rounded-[10px] bg-[#26272B] px-4 py-2 text-sm font-bold text-white hover:bg-[#26272B]/90">
-                    Reservar
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
+          {barbershops.map((barbershop) => (
+            <RecommendedBarbershopItem
+              key={barbershop.id}
+              barbershop={barbershop}
+            />
           ))}
         </div>
       </div>
