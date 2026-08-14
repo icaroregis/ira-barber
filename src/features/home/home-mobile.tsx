@@ -131,7 +131,7 @@ export default function HomeMobile() {
             </div>
 
             {/* Lado Direito - Data/Hora */}
-            <div className="flex w-[106px] shrink-0 flex-col items-center justify-center border-l border-solid border-[#26272B] px-9 py-3">
+            <div className="flex w-26.5 shrink-0 flex-col items-center justify-center border-l border-solid border-[#26272B] px-9 py-3">
               <p className="text-xs text-white">Fevereiro</p>
               <p className="text-2xl font-normal text-white">06</p>
               <p className="text-xs text-white">09:45</p>
