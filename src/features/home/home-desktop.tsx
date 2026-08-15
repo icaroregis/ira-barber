@@ -5,9 +5,16 @@ import Header from "@/components/header/header";
 import Footer from "@/components/footer/footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { BarbershopList } from "./components/barbershop-list";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { BarbershopItem, type Barbershop } from "./components/barbershop-item";
+
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 interface HomeDesktopProps {
   barbershops: Barbershop[];
@@ -18,7 +25,6 @@ export default function HomeDesktop({
   barbershops,
   popularBarbershops,
 }: HomeDesktopProps) {
-  console.log(barbershops.length);
   // Simulação de estado de login
   const isAuthenticated = true;
 
@@ -109,39 +115,75 @@ export default function HomeDesktop({
             </div>
 
             {/* DIREITA: Recomendados */}
-            <div className="ml-32 flex flex-1 flex-col gap-3 overflow-hidden">
+            <div className="ml-32 flex min-w-0 flex-1 flex-col gap-3">
               <h2 className="text-xs font-bold text-[#838896] uppercase">
                 RECOMENDADOS
               </h2>
-              <BarbershopList>
-                {barbershops.map((barbershop) => (
-                  <BarbershopItem key={barbershop.id} barbershop={barbershop} />
-                ))}
-              </BarbershopList>
+              <Carousel
+                opts={{
+                  align: "start",
+                }}
+                className="w-full"
+              >
+                <CarouselContent className="-ml-5">
+                  {barbershops.map((barbershop) => (
+                    <CarouselItem
+                      key={barbershop.id}
+                      className="basis-auto pl-5"
+                    >
+                      <BarbershopItem barbershop={barbershop} />
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <CarouselPrevious className="absolute top-1/2 -left-12 -translate-y-1/2" />
+                <CarouselNext className="absolute top-1/2 -right-12 -translate-y-1/2" />
+              </Carousel>
             </div>
           </div>
         </div>
 
         {/* BOTTOM SECTION (Populares e Mais Visitados) */}
-        <div className="mx-auto flex max-w-[1440px] flex-col gap-10 px-32 py-10">
+        <div className="mx-auto flex max-w-[1440px] min-w-0 flex-col gap-10 px-32 py-10">
           {/* POPULARES */}
           <div className="flex flex-col gap-4">
             <h2 className="text-xl font-bold text-white">Populares</h2>
-            <BarbershopList>
-              {popularBarbershops.map((barbershop) => (
-                <BarbershopItem key={barbershop.id} barbershop={barbershop} />
-              ))}
-            </BarbershopList>
+            <Carousel
+              opts={{
+                align: "start",
+              }}
+              className="w-full"
+            >
+              <CarouselContent className="-ml-5">
+                {popularBarbershops.map((barbershop) => (
+                  <CarouselItem key={barbershop.id} className="basis-auto pl-5">
+                    <BarbershopItem barbershop={barbershop} />
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className="absolute top-1/2 -left-12 -translate-y-1/2" />
+              <CarouselNext className="absolute top-1/2 -right-12 -translate-y-1/2" />
+            </Carousel>
           </div>
 
           {/* MAIS VISITADOS */}
           <div className="flex flex-col gap-4">
             <h2 className="text-xl font-bold text-white">Mais Visitados</h2>
-            <BarbershopList>
-              {barbershops.map((barbershop) => (
-                <BarbershopItem key={barbershop.id} barbershop={barbershop} />
-              ))}
-            </BarbershopList>
+            <Carousel
+              opts={{
+                align: "start",
+              }}
+              className="w-full"
+            >
+              <CarouselContent className="-ml-5">
+                {barbershops.map((barbershop) => (
+                  <CarouselItem key={barbershop.id} className="basis-auto pl-5">
+                    <BarbershopItem barbershop={barbershop} />
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className="absolute top-1/2 -left-12 -translate-y-1/2" />
+              <CarouselNext className="absolute top-1/2 -right-12 -translate-y-1/2" />
+            </Carousel>
           </div>
         </div>
       </main>
