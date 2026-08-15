@@ -135,8 +135,8 @@ export default function HomeDesktop({
                     </CarouselItem>
                   ))}
                 </CarouselContent>
-                <CarouselPrevious className="absolute top-1/2 -left-12 -translate-y-1/2" />
-                <CarouselNext className="absolute top-1/2 -right-12 -translate-y-1/2" />
+                <CarouselPrevious className="-left-12" />
+                <CarouselNext className="-right-12" />
               </Carousel>
             </div>
           </div>
@@ -160,8 +160,8 @@ export default function HomeDesktop({
                   </CarouselItem>
                 ))}
               </CarouselContent>
-              <CarouselPrevious className="absolute top-1/2 -left-12 -translate-y-1/2" />
-              <CarouselNext className="absolute top-1/2 -right-12 -translate-y-1/2" />
+              <CarouselPrevious className="-left-12" />
+              <CarouselNext className="-right-12" />
             </Carousel>
           </div>
 
@@ -181,8 +181,8 @@ export default function HomeDesktop({
                   </CarouselItem>
                 ))}
               </CarouselContent>
-              <CarouselPrevious className="absolute top-1/2 -left-12 -translate-y-1/2" />
-              <CarouselNext className="absolute top-1/2 -right-12 -translate-y-1/2" />
+              <CarouselPrevious className="-left-12" />
+              <CarouselNext className="-right-12" />
             </Carousel>
           </div>
         </div>
