@@ -7,14 +7,10 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { BarbershopItem, type Barbershop } from "./components/barbershop-item";
-
 import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
+  ManualCarousel,
+  ManualCarouselItem,
+} from "@/components/manual-carousel";
 
 interface HomeDesktopProps {
   barbershops: Barbershop[];
@@ -119,25 +115,13 @@ export default function HomeDesktop({
               <h2 className="text-xs font-bold text-[#838896] uppercase">
                 RECOMENDADOS
               </h2>
-              <Carousel
-                opts={{
-                  align: "start",
-                }}
-                className="w-full"
-              >
-                <CarouselContent className="-ml-5">
-                  {barbershops.map((barbershop) => (
-                    <CarouselItem
-                      key={barbershop.id}
-                      className="basis-auto pl-5"
-                    >
-                      <BarbershopItem barbershop={barbershop} />
-                    </CarouselItem>
-                  ))}
-                </CarouselContent>
-                <CarouselPrevious className="-left-12" />
-                <CarouselNext className="-right-12" />
-              </Carousel>
+              <ManualCarousel>
+                {barbershops.map((barbershop) => (
+                  <ManualCarouselItem key={barbershop.id}>
+                    <BarbershopItem barbershop={barbershop} />
+                  </ManualCarouselItem>
+                ))}
+              </ManualCarousel>
             </div>
           </div>
         </div>
@@ -147,43 +131,25 @@ export default function HomeDesktop({
           {/* POPULARES */}
           <div className="flex flex-col gap-4">
             <h2 className="text-xl font-bold text-white">Populares</h2>
-            <Carousel
-              opts={{
-                align: "start",
-              }}
-              className="w-full"
-            >
-              <CarouselContent className="-ml-5">
-                {popularBarbershops.map((barbershop) => (
-                  <CarouselItem key={barbershop.id} className="basis-auto pl-5">
-                    <BarbershopItem barbershop={barbershop} />
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-              <CarouselPrevious className="-left-12" />
-              <CarouselNext className="-right-12" />
-            </Carousel>
+            <ManualCarousel>
+              {popularBarbershops.map((barbershop) => (
+                <ManualCarouselItem key={barbershop.id}>
+                  <BarbershopItem barbershop={barbershop} />
+                </ManualCarouselItem>
+              ))}
+            </ManualCarousel>
           </div>
 
           {/* MAIS VISITADOS */}
           <div className="flex flex-col gap-4">
             <h2 className="text-xl font-bold text-white">Mais Visitados</h2>
-            <Carousel
-              opts={{
-                align: "start",
-              }}
-              className="w-full"
-            >
-              <CarouselContent className="-ml-5">
-                {barbershops.map((barbershop) => (
-                  <CarouselItem key={barbershop.id} className="basis-auto pl-5">
-                    <BarbershopItem barbershop={barbershop} />
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-              <CarouselPrevious className="-left-12" />
-              <CarouselNext className="-right-12" />
-            </Carousel>
+            <ManualCarousel>
+              {barbershops.map((barbershop) => (
+                <ManualCarouselItem key={barbershop.id}>
+                  <BarbershopItem barbershop={barbershop} />
+                </ManualCarouselItem>
+              ))}
+            </ManualCarousel>
           </div>
         </div>
       </main>
