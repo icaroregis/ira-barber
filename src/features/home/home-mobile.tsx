@@ -46,7 +46,7 @@ export default function HomeMobile({
       </div>
 
       {/* CATEGORIAS / SERVIÇOS */}
-      <div className="pt-6">
+      <div className="pt-6 pr-5">
         <div className="flex flex-row gap-3 overflow-x-auto [&::-webkit-scrollbar]:hidden">
           <div className="w-2 shrink-0" />
           <Button
@@ -165,7 +165,7 @@ export default function HomeMobile({
       </div>
 
       {/* Recomendados */}
-      <div className="flex flex-col gap-3 pt-6 pb-6">
+      <div className="flex flex-col gap-3 pt-6 pr-5 pb-6">
         <h2 className="px-5 text-xs font-bold text-[#838896]">RECOMENDADOS</h2>
 
         <div className="flex gap-4 overflow-x-auto [&::-webkit-scrollbar]:hidden">
@@ -178,7 +178,7 @@ export default function HomeMobile({
       </div>
 
       {/* Populares */}
-      <div className="flex flex-col gap-3 pt-6 pb-6">
+      <div className="flex flex-col gap-3 pt-6 pr-5 pb-6">
         <h2 className="px-5 text-xs font-bold text-[#838896]">POPULARES</h2>
 
         <div className="flex gap-4 overflow-x-auto [&::-webkit-scrollbar]:hidden">
