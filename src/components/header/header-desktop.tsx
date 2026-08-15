@@ -10,7 +10,14 @@ export default function HeaderDesktop() {
     <header className="flex h-24 w-full items-center justify-between border-b border-[#26272B] bg-[#1A1B1F] px-32">
       {/* LOGO */}
       <div className="flex items-center gap-2">
-        <Image src="/logo.svg" alt="IRA Barber" width={130} height={22} />
+        <Image
+          src="/logo.jpeg"
+          alt="IRA Barber Logo"
+          width={130}
+          height={22}
+          loading="eager"
+          style={{ width: "auto", height: "auto" }}
+        />
       </div>
 
       {/* DIREITA (Agendamentos e Perfil / Login) */}

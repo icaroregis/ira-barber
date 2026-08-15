@@ -28,6 +28,7 @@ type CarouselContextProps = {
   scrollNext: () => void;
   canScrollPrev: boolean;
   canScrollNext: boolean;
+  mounted: boolean;
 } & CarouselProps;
 
 const CarouselContext = React.createContext<CarouselContextProps | null>(null);
@@ -60,6 +61,12 @@ function Carousel({
   );
   const [canScrollPrev, setCanScrollPrev] = React.useState(false);
   const [canScrollNext, setCanScrollNext] = React.useState(false);
+  const [mounted, setMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setMounted(true);
+  }, []);
 
   const onSelect = React.useCallback((api: CarouselApi) => {
     if (!api) return;
@@ -96,14 +103,18 @@ function Carousel({
   React.useEffect(() => {
     if (!api) return;
 
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    onSelect(api);
+    // Use requestAnimationFrame para garantir que o Embla tenha calculado o layout
+    // antes de atualizar o estado de navegação
+    const handle = requestAnimationFrame(() => {
+      onSelect(api);
+    });
 
     api.on("init", onSelect);
     api.on("reInit", onSelect);
     api.on("select", onSelect);
 
     return () => {
+      cancelAnimationFrame(handle);
       api?.off("init", onSelect);
       api?.off("reInit", onSelect);
       api?.off("select", onSelect);
@@ -122,6 +133,7 @@ function Carousel({
         scrollNext,
         canScrollPrev,
         canScrollNext,
+        mounted,
       }}
     >
       <div
@@ -183,7 +195,7 @@ function CarouselPrevious({
   size = "icon-sm",
   ...props
 }: React.ComponentProps<typeof Button>) {
-  const { orientation, scrollPrev, canScrollPrev } = useCarousel();
+  const { orientation, scrollPrev, canScrollPrev, mounted } = useCarousel();
 
   return (
     <Button
@@ -197,7 +209,7 @@ function CarouselPrevious({
           : "-top-12 left-1/2 -translate-x-1/2 rotate-90",
         className,
       )}
-      disabled={!canScrollPrev}
+      disabled={mounted ? !canScrollPrev : true}
       onClick={scrollPrev}
       {...props}
     >
@@ -213,7 +225,7 @@ function CarouselNext({
   size = "icon-sm",
   ...props
 }: React.ComponentProps<typeof Button>) {
-  const { orientation, scrollNext, canScrollNext } = useCarousel();
+  const { orientation, scrollNext, canScrollNext, mounted } = useCarousel();
 
   return (
     <Button
@@ -227,7 +239,7 @@ function CarouselNext({
           : "-bottom-12 left-1/2 -translate-x-1/2 rotate-90",
         className,
       )}
-      disabled={!canScrollNext}
+      disabled={mounted ? !canScrollNext : true}
       onClick={scrollNext}
       {...props}
     >
