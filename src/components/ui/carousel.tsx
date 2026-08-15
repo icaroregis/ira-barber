@@ -96,16 +96,15 @@ function Carousel({
   React.useEffect(() => {
     if (!api) return;
 
-    // Atualiza imediatamente o estado usando um timeout rápido para não bloquear a renderização síncrona
-    const timerId = setTimeout(() => {
-      onSelect(api);
-    }, 0);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    onSelect(api);
 
+    api.on("init", onSelect);
     api.on("reInit", onSelect);
     api.on("select", onSelect);
 
     return () => {
-      clearTimeout(timerId);
+      api?.off("init", onSelect);
       api?.off("reInit", onSelect);
       api?.off("select", onSelect);
     };
