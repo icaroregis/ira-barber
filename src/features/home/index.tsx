@@ -19,7 +19,10 @@ export default async function Home() {
         />
       </div>
       <div className="hidden lg:block">
-        <HomeDesktop />
+        <HomeDesktop
+          barbershops={barbershops}
+          popularBarbershops={popularBarbershops}
+        />
       </div>
     </>
   );

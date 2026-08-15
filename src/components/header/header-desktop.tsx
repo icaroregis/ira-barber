@@ -1,36 +1,55 @@
 import Image from "next/image";
-import { Card, CardContent } from "../ui/card";
 import { Button } from "../ui/button";
-import { CalendarIcon, UserIcon } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { CalendarIcon, LogInIcon } from "lucide-react";
 
 export default function HeaderDesktop() {
+  const isAuthenticated = true;
+
   return (
-    <Card className="border-border bg-background rounded-none border-x-0 border-t-0 border-b border-solid py-0 ring-0">
-      <CardContent className="flex flex-row items-center justify-between px-32 py-7">
-        <Image
-          src="/logo.jpeg"
-          alt="IRA Barber Logo"
-          width={130}
-          height={22}
-          loading="eager"
-          style={{ width: "auto", height: "auto" }}
-        />
+    <header className="flex h-24 w-full items-center justify-between border-b border-[#26272B] bg-[#1A1B1F] px-32">
+      {/* LOGO */}
+      <div className="flex items-center gap-2">
+        <Image src="/logo.svg" alt="IRA Barber" width={130} height={22} />
+      </div>
 
-        <div className="flex flex-row items-center gap-6">
-          <Button
-            variant="outline"
-            className="flex h-9 flex-row items-center gap-2 rounded-lg px-4 text-sm font-bold"
-          >
-            <CalendarIcon size={16} />
-            Agendamentos
-          </Button>
-
-          <Button className="bg-primary hover:bg-primary/90 text-primary-foreground flex h-9 flex-row items-center gap-2 rounded-lg px-4 text-sm font-bold">
-            <UserIcon size={16} />
-            Perfil
-          </Button>
-        </div>
-      </CardContent>
-    </Card>
+      {/* DIREITA (Agendamentos e Perfil / Login) */}
+      <div className="flex items-center gap-6">
+        {isAuthenticated ? (
+          <>
+            <Button
+              variant="ghost"
+              className="hover:text-primary flex items-center gap-2 text-sm font-bold text-white hover:bg-transparent"
+            >
+              <CalendarIcon size={16} />
+              Agendamentos
+            </Button>
+            <div className="flex items-center gap-2">
+              <Avatar className="h-9 w-9">
+                <AvatarImage src="/avatar.png" />
+                <AvatarFallback>MI</AvatarFallback>
+              </Avatar>
+              <span className="text-sm font-bold text-white">
+                Miguel Silva Menezes
+              </span>
+            </div>
+          </>
+        ) : (
+          <>
+            <Button
+              variant="ghost"
+              className="hover:text-primary flex items-center gap-2 text-sm font-bold text-white hover:bg-transparent"
+            >
+              <CalendarIcon size={16} />
+              Agendamentos
+            </Button>
+            <Button className="bg-primary hover:bg-primary/90 flex items-center gap-2 rounded-lg px-6 text-sm font-bold text-white">
+              <LogInIcon size={16} />
+              Perfil
+            </Button>
+          </>
+        )}
+      </div>
+    </header>
   );
 }
