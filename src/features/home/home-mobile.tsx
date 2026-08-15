@@ -46,42 +46,56 @@ export default function HomeMobile({
       </div>
 
       {/* CATEGORIAS / SERVIÇOS */}
-      <div className="flex flex-row gap-3 overflow-x-auto px-5 pt-6 [&::-webkit-scrollbar]:hidden">
-        <Button
-          variant="outline"
-          className="flex h-10 shrink-0 flex-row items-center gap-2 rounded-lg border-[#26272B] bg-[#1A1B1F] px-4 text-sm font-bold shadow-[5px_5px_30px_0px_rgba(0,0,0,0.06)]"
-        >
-          <Image src="/scissors-icon.svg" alt="Cabelo" width={16} height={16} />
-          Cabelo
-        </Button>
+      <div className="pt-6">
+        <div className="flex flex-row gap-3 overflow-x-auto [&::-webkit-scrollbar]:hidden">
+          <div className="w-2 shrink-0" />
+          <Button
+            variant="outline"
+            className="flex h-10 shrink-0 flex-row items-center gap-2 rounded-lg border-[#26272B] bg-[#1A1B1F] px-4 text-sm font-bold shadow-[5px_5px_30px_0px_rgba(0,0,0,0.06)]"
+          >
+            <Image
+              src="/scissors-icon.svg"
+              alt="Cabelo"
+              width={16}
+              height={16}
+            />
+            Cabelo
+          </Button>
 
-        <Button
-          variant="outline"
-          className="flex h-10 shrink-0 flex-row items-center gap-2 rounded-lg border-[#26272B] bg-[#1A1B1F] px-4 text-sm font-bold shadow-[5px_5px_30px_0px_rgba(0,0,0,0.06)]"
-        >
-          <Image src="/mustache-icon.svg" alt="Barba" width={16} height={16} />
-          Barba
-        </Button>
+          <Button
+            variant="outline"
+            className="flex h-10 shrink-0 flex-row items-center gap-2 rounded-lg border-[#26272B] bg-[#1A1B1F] px-4 text-sm font-bold shadow-[5px_5px_30px_0px_rgba(0,0,0,0.06)]"
+          >
+            <Image
+              src="/mustache-icon.svg"
+              alt="Barba"
+              width={16}
+              height={16}
+            />
+            Barba
+          </Button>
 
-        <Button
-          variant="outline"
-          className="flex h-10 shrink-0 flex-row items-center gap-2 rounded-lg border-[#26272B] bg-[#1A1B1F] px-4 text-sm font-bold shadow-[5px_5px_30px_0px_rgba(0,0,0,0.06)]"
-        >
-          <Image
-            src="/razor-icon.svg"
-            alt="Acabamento"
-            width={16}
-            height={16}
-          />
-          Acabamento
-        </Button>
+          <Button
+            variant="outline"
+            className="flex h-10 shrink-0 flex-row items-center gap-2 rounded-lg border-[#26272B] bg-[#1A1B1F] px-4 text-sm font-bold shadow-[5px_5px_30px_0px_rgba(0,0,0,0.06)]"
+          >
+            <Image
+              src="/razor-icon.svg"
+              alt="Acabamento"
+              width={16}
+              height={16}
+            />
+            Acabamento
+          </Button>
 
-        <Button
-          variant="outline"
-          className="flex h-10 shrink-0 flex-row items-center gap-2 rounded-lg border-[#26272B] bg-[#1A1B1F] px-4 text-sm font-bold shadow-[5px_5px_30px_0px_rgba(0,0,0,0.06)]"
-        >
-          Sobrancelha
-        </Button>
+          <Button
+            variant="outline"
+            className="flex h-10 shrink-0 flex-row items-center gap-2 rounded-lg border-[#26272B] bg-[#1A1B1F] px-4 text-sm font-bold shadow-[5px_5px_30px_0px_rgba(0,0,0,0.06)]"
+          >
+            Sobrancelha
+          </Button>
+          <div className="w-2 shrink-0" />
+        </div>
       </div>
 
       {/* BANNER */}
@@ -151,24 +165,28 @@ export default function HomeMobile({
       </div>
 
       {/* Recomendados */}
-      <div className="flex flex-col gap-3 px-5 pt-6 pb-6">
-        <h2 className="text-xs font-bold text-[#838896]">RECOMENDADOS</h2>
+      <div className="flex flex-col gap-3 pt-6 pb-6">
+        <h2 className="px-5 text-xs font-bold text-[#838896]">RECOMENDADOS</h2>
 
         <div className="flex gap-4 overflow-x-auto [&::-webkit-scrollbar]:hidden">
+          <div className="w-1 shrink-0" />
           {barbershops.map((barbershop) => (
             <BarbershopItem key={barbershop.id} barbershop={barbershop} />
           ))}
+          <div className="w-1 shrink-0" />
         </div>
       </div>
 
       {/* Populares */}
-      <div className="flex flex-col gap-3 px-5 pt-6 pb-6">
-        <h2 className="text-xs font-bold text-[#838896]">POPULARES</h2>
+      <div className="flex flex-col gap-3 pt-6 pb-6">
+        <h2 className="px-5 text-xs font-bold text-[#838896]">POPULARES</h2>
 
         <div className="flex gap-4 overflow-x-auto [&::-webkit-scrollbar]:hidden">
+          <div className="w-1 shrink-0" />
           {popularBarbershops.map((barbershop) => (
             <BarbershopItem key={barbershop.id} barbershop={barbershop} />
           ))}
+          <div className="w-1 shrink-0" />
         </div>
       </div>
 
