@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/header/header";
+import Footer from "@/components/footer/footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { BarbershopItem, type Barbershop } from "./components/barbershop-item";
@@ -170,6 +171,9 @@ export default function HomeMobile({
           ))}
         </div>
       </div>
+
+      {/* FOOTER */}
+      <Footer />
     </div>
   );
 }

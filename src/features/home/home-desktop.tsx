@@ -1,4 +1,5 @@
 import Header from "@/components/header/header";
+import Footer from "@/components/footer/footer";
 
 export default function HomeDesktop() {
   return (
@@ -14,6 +15,9 @@ export default function HomeDesktop() {
           O layout desktop será implementado em breve.
         </p>
       </div>
+
+      {/* FOOTER */}
+      <Footer />
     </div>
   );
 }
