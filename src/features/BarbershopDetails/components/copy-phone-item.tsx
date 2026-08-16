@@ -40,7 +40,14 @@ export function CopyPhoneItem({ phone }: CopyPhoneItemProps) {
         className="h-8 rounded-lg border-[#26272B] bg-[#1A1B1F] px-4 text-sm font-bold text-white hover:bg-[#26272B]"
         onClick={handleCopyPhone}
       >
-        {copied ? <CheckIcon size={16} className="text-primary" /> : "Copiar"}
+        {copied ? (
+          <>
+            <CheckIcon size={16} className="text-primary" />
+            Copiado
+          </>
+        ) : (
+          "Copiar"
+        )}
       </Button>
     </div>
   );
