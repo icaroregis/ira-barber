@@ -51,10 +51,11 @@ export function BarbershopItem({ barbershop }: BarbershopItemProps) {
             <p className="text-xs text-[#838896]">{barbershop.address}</p>
           </div>
 
-          <Button className="mt-4 h-auto rounded-[10px] bg-[#26272B] px-4 py-2 text-sm font-bold text-white hover:bg-[#26272B]/90">
-            <Link href={`/barbershopDetails/${barbershop.id}`}>
-              {"Reservar"}
-            </Link>
+          <Button
+            asChild
+            className="mt-4 h-auto rounded-[10px] bg-[#26272B] px-4 py-2 text-sm font-bold text-white hover:bg-[#26272B]/90"
+          >
+            <Link href={`/barbershopDetails/${barbershop.id}`}>Reservar</Link>
           </Button>
         </div>
       </CardContent>
