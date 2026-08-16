@@ -2,7 +2,6 @@ import { SearchIcon } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import Header from "@/components/header/header";
-import Footer from "@/components/footer/footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -153,9 +152,6 @@ export default function HomeDesktop({
           </div>
         </div>
       </main>
-
-      {/* FOOTER */}
-      <Footer />
     </div>
   );
 }

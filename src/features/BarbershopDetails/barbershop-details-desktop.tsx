@@ -1,9 +1,9 @@
-import { ServiceItem } from "./components/service-item";
-import Footer from "@/components/footer/footer";
-import Header from "@/components/header/header";
 import Image from "next/image";
-import { MapPinIcon, StarIcon, SmartphoneIcon } from "lucide-react";
+import Header from "@/components/header/header";
 import { Button } from "@/components/ui/button";
+import { ServiceItem } from "./components/service-item";
+import { MapPinIcon, StarIcon, SmartphoneIcon } from "lucide-react";
+
 import {
   isRemoteImageUrl,
   normalizeImageUrl,
@@ -120,8 +120,6 @@ export default function BarbershopDetailsDesktop({
           </div>
         </div>
       </main>
-
-      <Footer />
     </div>
   );
 }

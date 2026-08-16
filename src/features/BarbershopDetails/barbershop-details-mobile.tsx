@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-import Footer from "@/components/footer/footer";
 import { Button } from "@/components/ui/button";
 import { ServiceItem } from "./components/service-item";
 import { CopyPhoneItem } from "./components/copy-phone-item";
@@ -111,8 +110,6 @@ export default function BarbershopDetailsMobile({
           </div>
         </div>
       </main>
-
-      <Footer />
     </div>
   );
 }
