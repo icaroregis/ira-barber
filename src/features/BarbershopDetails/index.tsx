@@ -1,4 +1,5 @@
 import { db } from "@/lib/prisma";
+import { serializeBarbershop } from "@/lib/utils";
 import BarbershopDetailsMobile from "./barbershop-details-mobile";
 import BarbershopDetailsDesktop from "./barbershop-details-desktop";
 
@@ -16,13 +17,15 @@ export default async function BarbershopDetails({ id }: { id: string }) {
     return <div>Barbershop not found</div>;
   }
 
+  const barbershopSerialized = serializeBarbershop(barbershop);
+
   return (
     <>
       <div className="block lg:hidden">
-        <BarbershopDetailsMobile barbershop={barbershop} />
+        <BarbershopDetailsMobile barbershop={barbershopSerialized} />
       </div>
       <div className="hidden lg:block">
-        <BarbershopDetailsDesktop barbershop={barbershop} />
+        <BarbershopDetailsDesktop barbershop={barbershopSerialized} />
       </div>
     </>
   );

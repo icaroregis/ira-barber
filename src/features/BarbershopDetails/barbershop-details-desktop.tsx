@@ -1,15 +1,13 @@
-import { Barbershop, BarbershopServices } from "@/app/_generated/prisma/client";
 import { ServiceItem } from "./components/service-item";
 import Footer from "@/components/footer/footer";
 import Header from "@/components/header/header";
 import Image from "next/image";
 import { MapPinIcon, StarIcon, SmartphoneIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import type { BarbershopSerialized } from "@/lib/utils";
 
 interface BarbershopDetailsDesktopProps {
-  barbershop: Barbershop & {
-    services: BarbershopServices[];
-  };
+  barbershop: BarbershopSerialized;
 }
 
 export default function BarbershopDetailsDesktop({

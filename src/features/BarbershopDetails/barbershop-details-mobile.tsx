@@ -1,10 +1,12 @@
 "use client";
 
-import { Barbershop, BarbershopServices } from "@/app/_generated/prisma/client";
-import { ServiceItem } from "./components/service-item";
-import Footer from "@/components/footer/footer";
+import Link from "next/link";
 import Image from "next/image";
+import Footer from "@/components/footer/footer";
 import { Button } from "@/components/ui/button";
+import { ServiceItem } from "./components/service-item";
+import type { BarbershopSerialized } from "@/lib/utils";
+
 import {
   ChevronLeftIcon,
   MenuIcon,
@@ -12,12 +14,9 @@ import {
   StarIcon,
   SmartphoneIcon,
 } from "lucide-react";
-import Link from "next/link";
 
 interface BarbershopDetailsMobileProps {
-  barbershop: Barbershop & {
-    services: BarbershopServices[];
-  };
+  barbershop: BarbershopSerialized;
 }
 
 export default function BarbershopDetailsMobile({

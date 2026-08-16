@@ -1,10 +1,10 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import type { ServiceSerialized } from "@/lib/utils";
 import { Card, CardContent } from "@/components/ui/card";
-import { BarbershopServices } from "@/app/_generated/prisma/client";
 
 interface ServiceItemProps {
-  service: BarbershopServices;
+  service: ServiceSerialized;
 }
 
 export function ServiceItem({ service }: ServiceItemProps) {
