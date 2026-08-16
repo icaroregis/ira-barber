@@ -5,6 +5,7 @@ import Image from "next/image";
 import Footer from "@/components/footer/footer";
 import { Button } from "@/components/ui/button";
 import { ServiceItem } from "./components/service-item";
+
 import {
   isRemoteImageUrl,
   normalizeImageUrl,
