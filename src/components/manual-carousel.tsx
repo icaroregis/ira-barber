@@ -33,7 +33,26 @@ export function ManualCarousel({ children, className }: ManualCarouselProps) {
     });
   }, [checkScroll]);
 
+  const [isVisible, setIsVisible] = React.useState(false);
+
   React.useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 0 },
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  React.useEffect(() => {
+    if (!isVisible) return;
+
     const scrollContainer = scrollRef.current;
     if (!scrollContainer) return;
 
@@ -47,7 +66,7 @@ export function ManualCarousel({ children, className }: ManualCarouselProps) {
       window.removeEventListener("resize", onScroll);
       if (rafId.current !== null) cancelAnimationFrame(rafId.current);
     };
-  }, [onScroll, checkScroll]);
+  }, [onScroll, checkScroll, isVisible]);
 
   const scroll = (direction: "left" | "right") => {
     if (scrollRef.current) {
