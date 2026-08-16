@@ -1,6 +1,10 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import type { ServiceSerialized } from "@/lib/utils";
+import {
+  isRemoteImageUrl,
+  normalizeImageUrl,
+  type ServiceSerialized,
+} from "@/lib/utils";
 import { Card, CardContent } from "@/components/ui/card";
 
 interface ServiceItemProps {
@@ -8,14 +12,18 @@ interface ServiceItemProps {
 }
 
 export function ServiceItem({ service }: ServiceItemProps) {
+  const imageUrl = normalizeImageUrl(service.imageUrl);
+
   return (
     <Card className="rounded-xl border-[#26272B] bg-[#1A1B1F]">
       <CardContent className="flex items-center gap-3 px-2">
         <div className="relative h-[110px] w-[110px] min-w-[110px] overflow-hidden rounded-xl">
           <Image
-            src={service.imageUrl || "/banner-image.png"}
+            src={imageUrl}
             alt={service.name}
             fill
+            sizes="110px"
+            unoptimized={isRemoteImageUrl(imageUrl)}
             className="object-cover"
           />
         </div>

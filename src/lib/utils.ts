@@ -48,3 +48,16 @@ export function serializeBarbershop(
     services: barbershop.services.map(serializeService),
   };
 }
+
+export function normalizeImageUrl(imageUrl?: string | null) {
+  if (!imageUrl) {
+    return "/banner-image.png";
+  }
+
+  const normalizedImageUrl = imageUrl.replaceAll("`", "").trim();
+  return normalizedImageUrl || "/banner-image.png";
+}
+
+export function isRemoteImageUrl(imageUrl: string) {
+  return imageUrl.startsWith("http://") || imageUrl.startsWith("https://");
+}

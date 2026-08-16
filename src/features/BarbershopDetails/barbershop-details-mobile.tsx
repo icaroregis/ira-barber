@@ -5,7 +5,11 @@ import Image from "next/image";
 import Footer from "@/components/footer/footer";
 import { Button } from "@/components/ui/button";
 import { ServiceItem } from "./components/service-item";
-import type { BarbershopSerialized } from "@/lib/utils";
+import {
+  isRemoteImageUrl,
+  normalizeImageUrl,
+  type BarbershopSerialized,
+} from "@/lib/utils";
 
 import {
   ChevronLeftIcon,
@@ -22,6 +26,8 @@ interface BarbershopDetailsMobileProps {
 export default function BarbershopDetailsMobile({
   barbershop,
 }: BarbershopDetailsMobileProps) {
+  const imageUrl = normalizeImageUrl(barbershop.imageUrl);
+
   const handleCopyPhone = (phone: string) => {
     navigator.clipboard.writeText(phone);
   };
@@ -32,9 +38,11 @@ export default function BarbershopDetailsMobile({
         {/* HEADER */}
         <div className="relative h-[250px] w-full">
           <Image
-            src={barbershop.imageUrl || "/banner-image.png"}
+            src={imageUrl}
             alt={barbershop.name}
             fill
+            sizes="100vw"
+            unoptimized={isRemoteImageUrl(imageUrl)}
             className="object-cover"
           />
 

@@ -4,7 +4,11 @@ import Header from "@/components/header/header";
 import Image from "next/image";
 import { MapPinIcon, StarIcon, SmartphoneIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import type { BarbershopSerialized } from "@/lib/utils";
+import {
+  isRemoteImageUrl,
+  normalizeImageUrl,
+  type BarbershopSerialized,
+} from "@/lib/utils";
 
 interface BarbershopDetailsDesktopProps {
   barbershop: BarbershopSerialized;
@@ -13,6 +17,8 @@ interface BarbershopDetailsDesktopProps {
 export default function BarbershopDetailsDesktop({
   barbershop,
 }: BarbershopDetailsDesktopProps) {
+  const imageUrl = normalizeImageUrl(barbershop.imageUrl);
+
   return (
     <div className="flex min-h-screen flex-col bg-[#141518]">
       <Header />
@@ -25,9 +31,11 @@ export default function BarbershopDetailsDesktop({
               {/* Banner Desktop */}
               <div className="relative h-[480px] w-full overflow-hidden rounded-2xl">
                 <Image
-                  src={barbershop.imageUrl || "/banner-image.png"}
+                  src={imageUrl}
                   alt={barbershop.name}
                   fill
+                  sizes="(min-width: 1536px) 744px, (min-width: 1024px) calc(100vw - 696px), 100vw"
+                  unoptimized={isRemoteImageUrl(imageUrl)}
                   className="object-cover"
                 />
               </div>

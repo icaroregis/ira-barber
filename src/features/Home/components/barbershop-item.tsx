@@ -3,6 +3,7 @@ import Image from "next/image";
 import { StarIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { isRemoteImageUrl, normalizeImageUrl } from "@/lib/utils";
 
 export interface Barbershop {
   id: string;
@@ -13,11 +14,6 @@ export interface Barbershop {
 
 interface BarbershopItemProps {
   barbershop: Barbershop;
-}
-
-function normalizeImageUrl(imageUrl: string) {
-  const normalizedImageUrl = imageUrl.replaceAll("`", "").trim();
-  return normalizedImageUrl || "/banner-image.png";
 }
 
 export function BarbershopItem({ barbershop }: BarbershopItemProps) {
@@ -33,6 +29,7 @@ export function BarbershopItem({ barbershop }: BarbershopItemProps) {
               alt={barbershop.name}
               fill
               sizes="(min-width: 1024px) 221px, 167px"
+              unoptimized={isRemoteImageUrl(imageUrl)}
               className="object-cover"
             />
 
