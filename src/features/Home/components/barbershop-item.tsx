@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Image from "next/image";
 import { StarIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -51,7 +52,9 @@ export function BarbershopItem({ barbershop }: BarbershopItemProps) {
           </div>
 
           <Button className="mt-4 h-auto rounded-[10px] bg-[#26272B] px-4 py-2 text-sm font-bold text-white hover:bg-[#26272B]/90">
-            Reservar
+            <Link href={`/barbershopDetails/${barbershop.id}`}>
+              {"Reservar"}
+            </Link>
           </Button>
         </div>
       </CardContent>
