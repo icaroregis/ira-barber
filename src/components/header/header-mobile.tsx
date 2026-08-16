@@ -18,6 +18,7 @@ export default function HeaderMobile() {
         <Button variant="outline" size="icon" className="h-10 w-10 rounded-lg">
           <MenuIcon size={20} />
         </Button>
+        {/* Implementar menu lateral aqui com sheet */}
       </CardContent>
     </Card>
   );
