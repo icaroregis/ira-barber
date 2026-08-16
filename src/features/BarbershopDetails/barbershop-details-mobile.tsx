@@ -1,10 +1,9 @@
-"use client";
-
 import Link from "next/link";
 import Image from "next/image";
 import Footer from "@/components/footer/footer";
 import { Button } from "@/components/ui/button";
 import { ServiceItem } from "./components/service-item";
+import { CopyPhoneItem } from "./components/copy-phone-item";
 
 import {
   isRemoteImageUrl,
@@ -12,13 +11,7 @@ import {
   type BarbershopSerialized,
 } from "@/lib/utils";
 
-import {
-  ChevronLeftIcon,
-  MenuIcon,
-  MapPinIcon,
-  StarIcon,
-  SmartphoneIcon,
-} from "lucide-react";
+import { ChevronLeftIcon, MenuIcon, MapPinIcon, StarIcon } from "lucide-react";
 
 interface BarbershopDetailsMobileProps {
   barbershop: BarbershopSerialized;
@@ -28,10 +21,6 @@ export default function BarbershopDetailsMobile({
   barbershop,
 }: BarbershopDetailsMobileProps) {
   const imageUrl = normalizeImageUrl(barbershop.imageUrl);
-
-  const handleCopyPhone = (phone: string) => {
-    navigator.clipboard.writeText(phone);
-  };
 
   return (
     <div className="flex min-h-screen flex-col bg-[#141518]">
@@ -116,20 +105,7 @@ export default function BarbershopDetailsMobile({
             </h2>
             <div className="flex flex-col gap-4">
               {barbershop.phones.map((phone, index) => (
-                <div key={index} className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <SmartphoneIcon className="text-white" size={20} />
-                    <p className="text-sm text-white">{phone}</p>
-                  </div>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="h-8 rounded-lg border-[#26272B] bg-[#1A1B1F] px-4 text-sm font-bold text-white hover:bg-[#26272B]"
-                    onClick={() => handleCopyPhone(phone)}
-                  >
-                    Copiar
-                  </Button>
-                </div>
+                <CopyPhoneItem key={index} phone={phone} />
               ))}
             </div>
           </div>
