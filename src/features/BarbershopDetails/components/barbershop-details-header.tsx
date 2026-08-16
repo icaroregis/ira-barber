@@ -1,9 +1,9 @@
 "use client";
 
+import Link from "next/link";
 import Image from "next/image";
-import { ChevronLeftIcon, MenuIcon } from "lucide-react";
-import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { ChevronLeftIcon, MenuIcon } from "lucide-react";
 
 interface BarbershopDetailsHeaderProps {
   imageUrl: string;
@@ -14,12 +14,6 @@ export function BarbershopDetailsHeader({
   imageUrl,
   name,
 }: BarbershopDetailsHeaderProps) {
-  const router = useRouter();
-
-  const handleBackClick = () => {
-    router.back();
-  };
-
   return (
     <div className="relative h-[250px] w-full lg:h-[480px]">
       <Image
@@ -34,9 +28,10 @@ export function BarbershopDetailsHeader({
           variant="outline"
           size="icon"
           className="h-8 w-8 rounded-lg border-none bg-[#141518]/60 hover:bg-[#141518]"
-          onClick={handleBackClick}
         >
-          <ChevronLeftIcon className="text-white" size={18} />
+          <Link href="/">
+            <ChevronLeftIcon className="text-white" size={18} />
+          </Link>
         </Button>
       </div>
 
