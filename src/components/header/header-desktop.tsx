@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Button } from "../ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { CalendarIcon, LogInIcon } from "lucide-react";
+import HeaderMenuSheet from "./header-menu-sheet";
 
 export default function HeaderDesktop() {
   const isAuthenticated = true;
@@ -31,15 +32,21 @@ export default function HeaderDesktop() {
               <CalendarIcon size={16} />
               Agendamentos
             </Button>
-            <div className="flex items-center gap-2">
-              <Avatar className="h-9 w-9">
-                <AvatarImage src="/avatar.png" />
-                <AvatarFallback>MI</AvatarFallback>
-              </Avatar>
-              <span className="text-sm font-bold text-white">
-                Miguel Silva Menezes
-              </span>
-            </div>
+            <HeaderMenuSheet isAuthenticated={isAuthenticated}>
+              <button
+                type="button"
+                className="flex items-center gap-2 rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-white/30"
+                aria-label="Abrir menu do perfil"
+              >
+                <Avatar className="h-9 w-9">
+                  <AvatarImage src="/avatar.png" />
+                  <AvatarFallback>MI</AvatarFallback>
+                </Avatar>
+                <span className="text-sm font-bold text-white">
+                  Miguel Silva Menezes
+                </span>
+              </button>
+            </HeaderMenuSheet>
           </>
         ) : (
           <>
@@ -50,10 +57,12 @@ export default function HeaderDesktop() {
               <CalendarIcon size={16} />
               Agendamentos
             </Button>
-            <Button className="bg-primary hover:bg-primary/90 flex items-center gap-2 rounded-lg px-6 text-sm font-bold text-white">
-              <LogInIcon size={16} />
-              Perfil
-            </Button>
+            <HeaderMenuSheet isAuthenticated={isAuthenticated}>
+              <Button className="bg-primary hover:bg-primary/90 flex items-center gap-2 rounded-lg px-6 text-sm font-bold text-white">
+                <LogInIcon size={16} />
+                Perfil
+              </Button>
+            </HeaderMenuSheet>
           </>
         )}
       </div>

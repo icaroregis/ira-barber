@@ -1,9 +1,12 @@
 import Image from "next/image";
-import { Card, CardContent } from "../ui/card";
-import { Button } from "../ui/button";
 import { MenuIcon } from "lucide-react";
+import { Button } from "../ui/button";
+import { Card, CardContent } from "../ui/card";
+import HeaderMenuSheet from "./header-menu-sheet";
 
 export default function HeaderMobile() {
+  const isAuthenticated = false;
+
   return (
     <Card className="border-border bg-background rounded-none border-x-0 border-t-0 border-b border-solid py-0 ring-0">
       <CardContent className="flex flex-row items-center justify-between p-5">
@@ -15,10 +18,17 @@ export default function HeaderMobile() {
           loading="eager"
           style={{ width: "auto", height: "auto" }}
         />
-        <Button variant="outline" size="icon" className="h-10 w-10 rounded-lg">
-          <MenuIcon size={20} />
-        </Button>
-        {/* Implementar menu lateral aqui com sheet */}
+
+        <HeaderMenuSheet isAuthenticated={isAuthenticated}>
+          <Button
+            variant="outline"
+            size="icon"
+            className="h-10 w-10 rounded-lg"
+            aria-label="Abrir menu"
+          >
+            <MenuIcon size={20} />
+          </Button>
+        </HeaderMenuSheet>
       </CardContent>
     </Card>
   );
