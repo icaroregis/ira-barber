@@ -8,7 +8,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
 import {
   CalendarIcon,
-  CircleIcon,
   HomeIcon,
   LogInIcon,
   LogOutIcon,
@@ -69,15 +68,21 @@ const serviceItems = [
   },
   {
     label: "Sobrancelha",
-    icon: <CircleIcon size={10} className="fill-current" />,
+    icon: (
+      <Image src="/sobrancelha.svg" alt="" width={16} height={16} aria-hidden />
+    ),
   },
   {
     label: "Massagem",
-    icon: <CircleIcon size={10} className="fill-current" />,
+    icon: (
+      <Image src="/massagem.svg" alt="" width={16} height={16} aria-hidden />
+    ),
   },
   {
     label: "Hidratação",
-    icon: <CircleIcon size={10} className="fill-current" />,
+    icon: (
+      <Image src="/hidratacao.svg" alt="" width={16} height={16} aria-hidden />
+    ),
   },
 ];
 
