@@ -10,6 +10,7 @@ import {
   CircleIcon,
   HomeIcon,
   LogInIcon,
+  LogOutIcon,
   XIcon,
 } from "lucide-react";
 
@@ -89,11 +90,13 @@ function MenuItem({
   label,
   active = false,
   href,
+  onClick,
 }: {
   icon: ReactNode;
   label: string;
   active?: boolean;
   href?: string;
+  onClick?: () => void;
 }) {
   const className =
     "flex w-full items-center gap-3 rounded-[10px] px-4 py-3 text-left text-sm transition-colors";
@@ -121,6 +124,7 @@ function MenuItem({
   return (
     <button
       type="button"
+      onClick={onClick}
       className={`${className} ${
         active
           ? "bg-primary text-white"
@@ -207,6 +211,18 @@ export default function HeaderMenuSheet({
               <MenuItem key={item.label} label={item.label} icon={item.icon} />
             ))}
           </div>
+
+          {isAuthenticated && (
+            <>
+              <div className="border-border border-t" />
+              <div className="flex flex-col gap-1 px-5 py-4">
+                <MenuItem
+                  label="Sair da conta"
+                  icon={<LogOutIcon size={16} />}
+                />
+              </div>
+            </>
+          )}
         </div>
       </SheetContent>
     </Sheet>
