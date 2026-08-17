@@ -32,6 +32,7 @@ export default function BarbershopDetailsMobile({
             alt={barbershop.name}
             fill
             sizes="100vw"
+            priority
             unoptimized={isRemoteImageUrl(imageUrl)}
             className="object-cover"
           />
