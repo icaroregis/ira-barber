@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Button } from "../ui/button";
-import SidebarSheet from "./sidebar-sheet";
+import SidebarSheet from "../sidebar-sheet";
 import { CalendarIcon, LogInIcon } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 

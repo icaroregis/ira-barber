@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Button } from "../ui/button";
+import { Button } from "./ui/button";
 import type { ReactNode } from "react";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 import {
   CalendarIcon,
@@ -20,7 +20,7 @@ import {
   SheetContent,
   SheetTitle,
   SheetTrigger,
-} from "../ui/sheet";
+} from "./ui/sheet";
 
 const primaryItems = [
   {

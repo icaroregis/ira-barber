@@ -1,8 +1,8 @@
 import Image from "next/image";
-import { MenuIcon } from "lucide-react";
 import { Button } from "../ui/button";
+import { MenuIcon } from "lucide-react";
+import HeaderMenuSheet from "../sidebar-sheet";
 import { Card, CardContent } from "../ui/card";
-import HeaderMenuSheet from "./sidebar-sheet";
 
 export default function HeaderMobile() {
   const isAuthenticated = true;

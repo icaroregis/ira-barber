@@ -1,9 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import SidebarSheet from "@/components/sidebar-sheet";
 import { ServiceItem } from "./components/service-item";
 import { CopyPhoneItem } from "./components/copy-phone-item";
-import SidebarSheet from "@/components/header/sidebar-sheet";
 import { ChevronLeftIcon, MenuIcon, MapPinIcon, StarIcon } from "lucide-react";
 
 import {
