@@ -1,9 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
-import type { ReactNode } from "react";
+import Image from "next/image";
 import { Button } from "../ui/button";
+import type { ReactNode } from "react";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
 import {
   CalendarIcon,
@@ -167,11 +168,22 @@ export default function HeaderMenuSheet({
           </div>
 
           <div className="mt-6 flex items-center justify-between px-5">
-            <div className="flex min-h-12 items-center">
+            <div className="flex min-h-12 items-center gap-3">
               {isAuthenticated ? (
-                <p className="text-lg font-bold text-white">
-                  Miguel Silva Menezes
-                </p>
+                <>
+                  <Avatar className="h-12 w-12">
+                    <AvatarImage src="https://github.com/shadcn.png" />
+                    <AvatarFallback>MS</AvatarFallback>
+                  </Avatar>
+                  <div>
+                    <p className="text-lg font-bold text-white">
+                      Miguel Silva Menezes
+                    </p>
+                    <p className="text-[12px] text-white/60">
+                      miguel.silva.menezes@example.com
+                    </p>
+                  </div>
+                </>
               ) : (
                 <p className="text-lg font-bold text-white">
                   Olá. Faça seu login!
