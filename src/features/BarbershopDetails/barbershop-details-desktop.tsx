@@ -10,6 +10,16 @@ import {
   type BarbershopSerialized,
 } from "@/lib/utils";
 
+const OPENING_HOURS = [
+  { day: "Segunda-feira", hours: "Fechado" },
+  { day: "Terça-feira", hours: "09:00 - 21:00" },
+  { day: "Quarta-feira", hours: "09:00 - 21:00" },
+  { day: "Quinta-feira", hours: "09:00 - 21:00" },
+  { day: "Sexta-feira", hours: "09:00 - 21:00" },
+  { day: "Sábado", hours: "08:00 - 18:00" },
+  { day: "Domingo", hours: "Fechado" },
+];
+
 interface BarbershopDetailsDesktopProps {
   barbershop: BarbershopSerialized;
 }
@@ -134,15 +144,7 @@ export default function BarbershopDetailsDesktop({
                 {/* OPENING HOURS */}
                 <div className="flex flex-col gap-4">
                   <div className="flex flex-col gap-3">
-                    {[
-                      { day: "Segunda-feira", hours: "Fechado" },
-                      { day: "Terça-feira", hours: "09:00 - 21:00" },
-                      { day: "Quarta-feira", hours: "09:00 - 21:00" },
-                      { day: "Quinta-feira", hours: "09:00 - 21:00" },
-                      { day: "Sexta-feira", hours: "09:00 - 21:00" },
-                      { day: "Sábado", hours: "08:00 - 18:00" },
-                      { day: "Domingo", hours: "Fechado" },
-                    ].map((item) => (
+                    {OPENING_HOURS.map((item) => (
                       <div
                         key={item.day}
                         className="flex items-center justify-between"
