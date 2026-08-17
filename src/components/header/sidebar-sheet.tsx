@@ -110,7 +110,7 @@ const serviceItems = [
   },
 ];
 
-interface HeaderMenuSheetProps {
+interface SidebarSheetProps {
   children: ReactNode;
   isAuthenticated: boolean;
 }
@@ -167,10 +167,10 @@ function MenuItem({
   );
 }
 
-export default function HeaderMenuSheet({
+export default function SidebarSheet({
   children,
   isAuthenticated,
-}: HeaderMenuSheetProps) {
+}: SidebarSheetProps) {
   return (
     <Sheet>
       <SheetTrigger asChild>{children}</SheetTrigger>

@@ -3,14 +3,14 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ServiceItem } from "./components/service-item";
 import { CopyPhoneItem } from "./components/copy-phone-item";
+import SidebarSheet from "@/components/header/sidebar-sheet";
+import { ChevronLeftIcon, MenuIcon, MapPinIcon, StarIcon } from "lucide-react";
 
 import {
   isRemoteImageUrl,
   normalizeImageUrl,
   type BarbershopSerialized,
 } from "@/lib/utils";
-
-import { ChevronLeftIcon, MenuIcon, MapPinIcon, StarIcon } from "lucide-react";
 
 interface BarbershopDetailsMobileProps {
   barbershop: BarbershopSerialized;
@@ -20,6 +20,7 @@ export default function BarbershopDetailsMobile({
   barbershop,
 }: BarbershopDetailsMobileProps) {
   const imageUrl = normalizeImageUrl(barbershop.imageUrl);
+  const isAuthenticated = true;
 
   return (
     <div className="flex min-h-screen flex-col bg-[#141518]">
@@ -49,13 +50,15 @@ export default function BarbershopDetailsMobile({
           </div>
 
           <div className="absolute top-4 right-4 z-10">
-            <Button
-              variant="outline"
-              size="icon"
-              className="h-8 w-8 rounded-lg border-none bg-[#141518]/60 hover:bg-[#141518]"
-            >
-              <MenuIcon className="text-white" size={18} />
-            </Button>
+            <SidebarSheet isAuthenticated={isAuthenticated}>
+              <Button
+                variant="outline"
+                size="icon"
+                className="h-8 w-8 rounded-lg border-none bg-[#141518]/60 hover:bg-[#141518]"
+              >
+                <MenuIcon className="text-white" size={18} />
+              </Button>
+            </SidebarSheet>
           </div>
         </div>
 

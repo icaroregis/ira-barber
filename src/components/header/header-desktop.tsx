@@ -1,8 +1,8 @@
 import Image from "next/image";
 import { Button } from "../ui/button";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import SidebarSheet from "./sidebar-sheet";
 import { CalendarIcon, LogInIcon } from "lucide-react";
-import HeaderMenuSheet from "./header-menu-sheet";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
 export default function HeaderDesktop() {
   const isAuthenticated = true;
@@ -32,7 +32,7 @@ export default function HeaderDesktop() {
               <CalendarIcon size={16} />
               Agendamentos
             </Button>
-            <HeaderMenuSheet isAuthenticated={isAuthenticated}>
+            <SidebarSheet isAuthenticated={isAuthenticated}>
               <button
                 type="button"
                 className="flex items-center gap-2 rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-white/30"
@@ -46,7 +46,7 @@ export default function HeaderDesktop() {
                   Miguel Silva Menezes
                 </span>
               </button>
-            </HeaderMenuSheet>
+            </SidebarSheet>
           </>
         ) : (
           <>
@@ -57,12 +57,12 @@ export default function HeaderDesktop() {
               <CalendarIcon size={16} />
               Agendamentos
             </Button>
-            <HeaderMenuSheet isAuthenticated={isAuthenticated}>
+            <SidebarSheet isAuthenticated={isAuthenticated}>
               <Button className="bg-primary hover:bg-primary/90 flex items-center gap-2 rounded-lg px-6 text-sm font-bold text-white">
                 <LogInIcon size={16} />
                 Perfil
               </Button>
-            </HeaderMenuSheet>
+            </SidebarSheet>
           </>
         )}
       </div>
