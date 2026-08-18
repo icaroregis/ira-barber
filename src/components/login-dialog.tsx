@@ -10,15 +10,15 @@ import {
   DialogTrigger,
 } from "./ui/dialog";
 import Image from "next/image";
+import { signIn } from "next-auth/react";
 
 interface LoginDialogProps {
   children: React.ReactNode;
 }
 
 const LoginDialog = ({ children }: LoginDialogProps) => {
-  const handleLoginWithGoogle = () => {
-    // Placeholder for login logic
-    console.log("Login with Google clicked");
+  const handleLoginWithGoogle = async () => {
+    await signIn("google");
   };
 
   return (

@@ -1,6 +1,10 @@
 import { twMerge } from "tailwind-merge";
 import { clsx, type ClassValue } from "clsx";
-import type { Barbershop, BarbershopServices } from "@/generated/prisma/client";
+
+import {
+  BarbershopServices,
+  Barbershop,
+} from "@/generated/prisma/client/client";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));

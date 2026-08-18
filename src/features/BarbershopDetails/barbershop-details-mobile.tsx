@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -5,6 +7,7 @@ import SidebarSheet from "@/components/sidebar-sheet";
 import { ServiceItem } from "./components/service-item";
 import { CopyPhoneItem } from "./components/copy-phone-item";
 import { ChevronLeftIcon, MenuIcon, MapPinIcon, StarIcon } from "lucide-react";
+import { useSession } from "next-auth/react";
 
 import {
   isRemoteImageUrl,
@@ -20,7 +23,8 @@ export default function BarbershopDetailsMobile({
   barbershop,
 }: BarbershopDetailsMobileProps) {
   const imageUrl = normalizeImageUrl(barbershop.imageUrl);
-  const isAuthenticated = false;
+  const { data: session } = useSession();
+  const isAuthenticated = !!session?.user;
 
   return (
     <div className="flex min-h-screen flex-col bg-[#141518]">

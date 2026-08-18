@@ -1,11 +1,15 @@
+"use client";
+
 import Image from "next/image";
 import { Button } from "../ui/button";
 import { MenuIcon } from "lucide-react";
 import HeaderMenuSheet from "../sidebar-sheet";
 import { Card, CardContent } from "../ui/card";
+import { useSession } from "next-auth/react";
 
 export default function HeaderMobile() {
-  const isAuthenticated = false;
+  const { data: session } = useSession();
+  const isAuthenticated = !!session?.user;
 
   return (
     <Card className="border-border bg-background rounded-none border-x-0 border-t-0 border-b border-solid py-0 ring-0">

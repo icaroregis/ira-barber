@@ -22,7 +22,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "./ui/sheet";
-import { signIn } from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 const primaryItems = [
   {
@@ -173,8 +173,14 @@ export default function SidebarSheet({
   children,
   isAuthenticated,
 }: SidebarSheetProps) {
+  const { data: session } = useSession();
+
   const handleLoginWithGoogleClick = async () => {
     await signIn("google");
+  };
+
+  const handleLogoutClick = async () => {
+    await signOut();
   };
 
   return (
@@ -207,15 +213,17 @@ export default function SidebarSheet({
               {isAuthenticated ? (
                 <>
                   <Avatar className="h-12 w-12">
-                    <AvatarImage src="https://github.com/shadcn.png" />
-                    <AvatarFallback>MS</AvatarFallback>
+                    <AvatarImage src={session?.user?.image || ""} />
+                    <AvatarFallback>
+                      {session?.user?.name?.charAt(0)?.toUpperCase() || "U"}
+                    </AvatarFallback>
                   </Avatar>
                   <div>
                     <p className="text-lg font-bold text-white">
-                      Miguel Silva Menezes
+                      {session?.user?.name || "Usuário"}
                     </p>
                     <p className="text-[12px] text-white/60">
-                      miguel.silva.menezes@example.com
+                      {session?.user?.email || ""}
                     </p>
                   </div>
                 </>
@@ -269,6 +277,7 @@ export default function SidebarSheet({
                 <MenuItem
                   label="Sair da conta"
                   icon={<LogOutIcon size={16} />}
+                  onClick={handleLogoutClick}
                 />
               </div>
             </>

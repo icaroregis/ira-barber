@@ -1,11 +1,15 @@
+"use client";
+
 import Image from "next/image";
 import { Button } from "../ui/button";
 import SidebarSheet from "../sidebar-sheet";
 import { CalendarIcon, LogInIcon } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { useSession } from "next-auth/react";
 
 export default function HeaderDesktop() {
-  const isAuthenticated = false;
+  const { data: session } = useSession();
+  const isAuthenticated = !!session?.user;
 
   return (
     <header className="flex h-24 w-full items-center justify-between border-b border-[#26272B] bg-[#1A1B1F] px-32">
@@ -39,11 +43,13 @@ export default function HeaderDesktop() {
                 aria-label="Abrir menu do perfil"
               >
                 <Avatar className="h-9 w-9">
-                  <AvatarImage src="/avatar.png" />
-                  <AvatarFallback>MI</AvatarFallback>
+                  <AvatarImage src={session?.user?.image || ""} />
+                  <AvatarFallback>
+                    {session?.user?.name?.charAt(0)?.toUpperCase() || "U"}
+                  </AvatarFallback>
                 </Avatar>
                 <span className="text-sm font-bold text-white">
-                  Miguel Silva Menezes
+                  {session?.user?.name || "Usuário"}
                 </span>
               </button>
             </SidebarSheet>
