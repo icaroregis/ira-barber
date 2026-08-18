@@ -22,6 +22,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "./ui/sheet";
+import { signIn } from "next-auth/react";
 
 const primaryItems = [
   {
@@ -172,6 +173,10 @@ export default function SidebarSheet({
   children,
   isAuthenticated,
 }: SidebarSheetProps) {
+  const handleLoginWithGoogleClick = async () => {
+    await signIn("google");
+  };
+
   return (
     <Sheet>
       <SheetTrigger asChild>{children}</SheetTrigger>
@@ -227,6 +232,7 @@ export default function SidebarSheet({
                   size="icon"
                   className="bg-primary hover:bg-primary/90 h-10 w-10 rounded-[10px]"
                   aria-label="Fazer login"
+                  onClick={handleLoginWithGoogleClick}
                 >
                   <LogInIcon size={18} />
                 </Button>
