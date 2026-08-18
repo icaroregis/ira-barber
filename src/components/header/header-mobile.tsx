@@ -5,7 +5,7 @@ import HeaderMenuSheet from "../sidebar-sheet";
 import { Card, CardContent } from "../ui/card";
 
 export default function HeaderMobile() {
-  const isAuthenticated = true;
+  const isAuthenticated = false;
 
   return (
     <Card className="border-border bg-background rounded-none border-x-0 border-t-0 border-b border-solid py-0 ring-0">

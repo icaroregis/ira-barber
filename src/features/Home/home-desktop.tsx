@@ -21,7 +21,7 @@ export default function HomeDesktop({
   popularBarbershops,
 }: HomeDesktopProps) {
   // Simulação de estado de login
-  const isAuthenticated = true;
+  const isAuthenticated = false;
 
   return (
     <div className="flex min-h-screen flex-col bg-[#141518]">

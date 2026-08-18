@@ -20,7 +20,7 @@ export default function BarbershopDetailsMobile({
   barbershop,
 }: BarbershopDetailsMobileProps) {
   const imageUrl = normalizeImageUrl(barbershop.imageUrl);
-  const isAuthenticated = true;
+  const isAuthenticated = false;
 
   return (
     <div className="flex min-h-screen flex-col bg-[#141518]">

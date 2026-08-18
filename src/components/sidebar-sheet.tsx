@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Button } from "./ui/button";
 import type { ReactNode } from "react";
+import LoginDialog from "./login-dialog";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 import {
@@ -221,13 +222,15 @@ export default function SidebarSheet({
             </div>
 
             {!isAuthenticated && (
-              <Button
-                size="icon"
-                className="bg-primary hover:bg-primary/90 h-10 w-10 rounded-[10px]"
-                aria-label="Fazer login"
-              >
-                <LogInIcon size={16} />
-              </Button>
+              <LoginDialog>
+                <Button
+                  size="icon"
+                  className="bg-primary hover:bg-primary/90 h-10 w-10 rounded-[10px]"
+                  aria-label="Fazer login"
+                >
+                  <LogInIcon size={16} />
+                </Button>
+              </LoginDialog>
             )}
           </div>
 

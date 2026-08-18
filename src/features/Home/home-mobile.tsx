@@ -25,7 +25,7 @@ export default function HomeMobile({
       {/* SAUDAÇÃO */}
       <div className="flex flex-col gap-1 px-5 py-6">
         <h2 className="text-xl">
-          Olá, <span className="font-bold">Miguel!</span>
+          Olá. <span className="font-bold">Faça seu login!</span>
         </h2>
         <p className="text-sm">Sexta, 2 de Fevereiro</p>
       </div>

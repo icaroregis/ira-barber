@@ -5,7 +5,7 @@ import { CalendarIcon, LogInIcon } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
 export default function HeaderDesktop() {
-  const isAuthenticated = true;
+  const isAuthenticated = false;
 
   return (
     <header className="flex h-24 w-full items-center justify-between border-b border-[#26272B] bg-[#1A1B1F] px-32">
