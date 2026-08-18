@@ -228,7 +228,7 @@ export default function SidebarSheet({
                   className="bg-primary hover:bg-primary/90 h-10 w-10 rounded-[10px]"
                   aria-label="Fazer login"
                 >
-                  <LogInIcon size={16} />
+                  <LogInIcon size={18} />
                 </Button>
               </LoginDialog>
             )}

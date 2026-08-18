@@ -39,7 +39,13 @@ const LoginDialog = ({ children }: LoginDialogProps) => {
           className="mt-6 flex w-full gap-2 font-bold"
           onClick={handleLoginWithGoogle}
         >
-          <Image src="/google.svg" width={18} height={18} alt="Google" />
+          <Image
+            src="/google.svg"
+            width={18}
+            height={18}
+            alt="Google"
+            aria-hidden
+          />
           Google
         </Button>
       </DialogContent>
