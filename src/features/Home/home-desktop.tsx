@@ -1,7 +1,7 @@
 import Header from "@/components/header/header";
 import WelcomeGreeting from "./components/welcome-greeting";
 import BookingsSection from "./components/bookings-section";
-import SearchBar from "./components/search-bar";
+import SearchBar from "./components/SearchBar";
 import { BarbershopItem, type Barbershop } from "./components/barbershop-item";
 import {
   ManualCarousel,

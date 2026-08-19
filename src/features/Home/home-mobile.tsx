@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import Header from "@/components/header/header";
 import { Card, CardContent } from "@/components/ui/card";
 import WelcomeGreeting from "./components/welcome-greeting";
-import SearchBar from "./components/search-bar";
+import SearchBar from "./components/SearchBar";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { BarbershopItem, type Barbershop } from "./components/barbershop-item";
 
