@@ -1,36 +1,53 @@
 import { db } from "@/lib/prisma";
 import SearchForBarbershopsMobile from "./search-for-barbershops-mobile";
 import SearchForBarbershopsDesktop from "./search-for-barbershops-desktop";
-
 interface SearchForBarbershopsProps {
-  searchTerm: string;
+  title?: string;
+  service?: string;
 }
 
 export default async function SearchForBarbershops({
-  searchTerm,
+  title,
+  service,
 }: SearchForBarbershopsProps) {
-  const where = searchTerm
-    ? {
-        OR: [
-          { name: { contains: searchTerm, mode: "insensitive" as const } },
-          { address: { contains: searchTerm, mode: "insensitive" as const } },
-        ],
-      }
-    : {};
-
-  const barbershops = await db.barbershop.findMany({ where });
+  const barbershops = await db.barbershop.findMany({
+    where: {
+      OR: [
+        title
+          ? {
+              name: {
+                contains: title,
+                mode: "insensitive",
+              },
+            }
+          : {},
+        service
+          ? {
+              services: {
+                some: {
+                  name: {
+                    contains: service,
+                    mode: "insensitive",
+                  },
+                },
+              },
+            }
+          : {},
+      ],
+    },
+  });
 
   return (
     <>
       <div className="flex flex-1 flex-col lg:hidden">
         <SearchForBarbershopsMobile
-          searchTerm={searchTerm}
+          searchTerm={title || service || ""}
           barbershops={barbershops}
         />
       </div>
       <div className="hidden flex-1 flex-col lg:flex">
         <SearchForBarbershopsDesktop
-          searchTerm={searchTerm}
+          searchTerm={title || service || ""}
           barbershops={barbershops}
         />
       </div>

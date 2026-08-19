@@ -1,14 +1,15 @@
 import SearchForBarbershops from "@/features/SearchForBarbershops";
 
 interface SearchForBarbershopsPageProps {
-  searchParams: Promise<{ search?: string }>;
+  searchParams: Promise<{ title?: string; service?: string }>;
 }
 
 export default async function SearchForBarbershopsPage({
   searchParams,
 }: SearchForBarbershopsPageProps) {
   const resolvedSearchParams = await searchParams;
-  const searchTerm = resolvedSearchParams.search ?? "";
+  const title = resolvedSearchParams.title;
+  const service = resolvedSearchParams.service;
 
-  return <SearchForBarbershops searchTerm={searchTerm} />;
+  return <SearchForBarbershops title={title} service={service} />;
 }

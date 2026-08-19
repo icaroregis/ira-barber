@@ -10,7 +10,7 @@ export const useSearchBarForm = (
   return useForm<Values>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      search: defaultSearch,
+      title: defaultSearch,
     },
     mode: "onBlur",
     reValidateMode: "onChange",

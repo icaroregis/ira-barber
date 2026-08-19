@@ -18,13 +18,13 @@ export default function SearchBar({
 }: SearchBarProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const initialSearch = searchParams.get("search") ?? "";
-  const form = useSearchBarForm(initialSearch);
+  const initialTitle = searchParams.get("title") ?? "";
+  const form = useSearchBarForm(initialTitle);
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    const params = new URLSearchParams(searchParams.toString());
-    params.set("search", values.search);
-    router.push(`/searchForBarbershops?${params.toString()}`);
+    // encodeURIComponent retira caracteres especiais do título para evitar erros de codificação
+    const encodedTitle = encodeURIComponent(values.title);
+    router.push(`/searchForBarbershops?title=${encodedTitle}`);
   }
 
   return (

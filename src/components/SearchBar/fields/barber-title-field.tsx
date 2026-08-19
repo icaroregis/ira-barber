@@ -33,7 +33,7 @@ export const BarberTitleField = ({
     <>
       <FormField
         control={control}
-        name="search"
+        name="title"
         render={({ field }) => (
           <FormItem className="relative w-full space-y-0">
             <FormControl>

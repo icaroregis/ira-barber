@@ -1,11 +1,12 @@
 "use client";
 
+import Link from "next/link";
 import Image from "next/image";
 import { Button } from "../ui/button";
 import SidebarSheet from "../sidebar-sheet";
+import { useSession } from "next-auth/react";
 import { CalendarIcon, LogInIcon } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { useSession } from "next-auth/react";
 
 export default function HeaderDesktop() {
   const { data: session } = useSession();
@@ -15,14 +16,16 @@ export default function HeaderDesktop() {
     <header className="flex h-24 w-full items-center justify-between border-b border-[#26272B] bg-[#1A1B1F] px-32">
       {/* LOGO */}
       <div className="flex items-center gap-2">
-        <Image
-          src="/logo.jpeg"
-          alt="IRA Barber Logo"
-          width={130}
-          height={22}
-          loading="eager"
-          style={{ width: "auto", height: "auto" }}
-        />
+        <Link href="/">
+          <Image
+            src="/logo.jpeg"
+            alt="IRA Barber Logo"
+            width={130}
+            height={22}
+            loading="eager"
+            style={{ width: "auto", height: "auto" }}
+          />
+        </Link>
       </div>
 
       {/* DIREITA (Agendamentos e Perfil / Login) */}

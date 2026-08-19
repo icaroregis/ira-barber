@@ -137,7 +137,7 @@ function MenuItem({
     return (
       <SheetClose asChild>
         <Link
-          href={href}
+          href={href === "/" ? "/" : href}
           className={`${className} ${
             active
               ? "bg-primary text-white"
@@ -266,7 +266,12 @@ export default function SidebarSheet({
 
           <div className="flex flex-col gap-1 px-5 py-4">
             {serviceItems.map((item) => (
-              <MenuItem key={item.label} label={item.label} icon={item.icon} />
+              <MenuItem
+                key={item.label}
+                label={item.label}
+                icon={item.icon}
+                href={`/searchForBarbershops?service=${item.label}`}
+              />
             ))}
           </div>
 
