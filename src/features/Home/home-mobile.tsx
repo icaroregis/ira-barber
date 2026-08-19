@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/header/header";
 import { Card, CardContent } from "@/components/ui/card";
+import WelcomeGreeting from "./components/welcome-greeting";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { BarbershopItem, type Barbershop } from "./components/barbershop-item";
 
@@ -23,12 +24,7 @@ export default function HomeMobile({
       <Header />
 
       {/* SAUDAÇÃO */}
-      <div className="flex flex-col gap-1 px-5 py-6">
-        <h2 className="text-xl">
-          Olá. <span className="font-bold">Faça seu login!</span>
-        </h2>
-        <p className="text-sm">Sexta, 2 de Fevereiro</p>
-      </div>
+      <WelcomeGreeting variant="mobile" />
 
       {/* BUSCA */}
       <div className="flex flex-row items-center gap-2 px-5">

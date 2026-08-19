@@ -62,3 +62,23 @@ export function normalizeImageUrl(imageUrl?: string | null) {
 export function isRemoteImageUrl(imageUrl: string) {
   return imageUrl.startsWith("http://") || imageUrl.startsWith("https://");
 }
+
+export function formatWelcomeDate(date: Date = new Date()) {
+  const weekdayFormatter = new Intl.DateTimeFormat("pt-BR", {
+    weekday: "long",
+  });
+  const dayFormatter = new Intl.DateTimeFormat("pt-BR", {
+    day: "numeric",
+  });
+  const monthFormatter = new Intl.DateTimeFormat("pt-BR", {
+    month: "long",
+  });
+
+  const weekday = weekdayFormatter.format(date);
+  const capitalizedWeekday = weekday.charAt(0).toUpperCase() + weekday.slice(1);
+  const day = dayFormatter.format(date);
+  const month = monthFormatter.format(date);
+  const capitalizedMonth = month.charAt(0).toUpperCase() + month.slice(1);
+
+  return `${capitalizedWeekday}, ${day} de ${capitalizedMonth}`;
+}
