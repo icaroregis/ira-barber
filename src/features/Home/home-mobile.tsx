@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import SearchBar from "@/components/SearchBar";
 import { Button } from "@/components/ui/button";
@@ -7,6 +8,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import WelcomeGreeting from "./components/welcome-greeting";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { BarbershopItem, type Barbershop } from "./components/barbershop-item";
+import { serviceItems } from "@/constants/service-items";
 
 interface HomeMobileProps {
   barbershops: Barbershop[];
@@ -37,51 +39,19 @@ export default function HomeMobile({
       <div className="pt-6 pr-5">
         <div className="flex flex-row gap-3 overflow-x-auto [&::-webkit-scrollbar]:hidden">
           <div className="w-2 shrink-0" />
-          <Button
-            variant="outline"
-            className="flex h-10 shrink-0 flex-row items-center gap-2 rounded-lg border-[#26272B] bg-[#1A1B1F] px-4 text-sm font-bold shadow-[5px_5px_30px_0px_rgba(0,0,0,0.06)]"
-          >
-            <Image
-              src="/scissors-icon.svg"
-              alt="Cabelo"
-              width={16}
-              height={16}
-            />
-            Cabelo
-          </Button>
-
-          <Button
-            variant="outline"
-            className="flex h-10 shrink-0 flex-row items-center gap-2 rounded-lg border-[#26272B] bg-[#1A1B1F] px-4 text-sm font-bold shadow-[5px_5px_30px_0px_rgba(0,0,0,0.06)]"
-          >
-            <Image
-              src="/mustache-icon.svg"
-              alt="Barba"
-              width={16}
-              height={16}
-            />
-            Barba
-          </Button>
-
-          <Button
-            variant="outline"
-            className="flex h-10 shrink-0 flex-row items-center gap-2 rounded-lg border-[#26272B] bg-[#1A1B1F] px-4 text-sm font-bold shadow-[5px_5px_30px_0px_rgba(0,0,0,0.06)]"
-          >
-            <Image
-              src="/razor-icon.svg"
-              alt="Acabamento"
-              width={16}
-              height={16}
-            />
-            Acabamento
-          </Button>
-
-          <Button
-            variant="outline"
-            className="flex h-10 shrink-0 flex-row items-center gap-2 rounded-lg border-[#26272B] bg-[#1A1B1F] px-4 text-sm font-bold shadow-[5px_5px_30px_0px_rgba(0,0,0,0.06)]"
-          >
-            Sobrancelha
-          </Button>
+          {serviceItems.map((item) => (
+            <Button
+              key={item.label}
+              variant="outline"
+              asChild
+              className="flex h-10 shrink-0 flex-row items-center gap-2 rounded-lg border-[#26272B] bg-[#1A1B1F] px-4 text-sm font-bold shadow-[5px_5px_30px_0px_rgba(0,0,0,0.06)]"
+            >
+              <Link href={`/searchForBarbershops?service=${item.label}`}>
+                {item.icon}
+                {item.label}
+              </Link>
+            </Button>
+          ))}
           <div className="w-2 shrink-0" />
         </div>
       </div>

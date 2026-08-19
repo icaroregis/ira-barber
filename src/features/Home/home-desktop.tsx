@@ -33,7 +33,6 @@ export default function HomeDesktop({
             <div className="flex w-[400px] shrink-0 flex-col gap-8">
               <div className="flex flex-col gap-6">
                 <WelcomeGreeting variant="desktop" />
-
                 <SearchBar variant="desktop" />
               </div>
 

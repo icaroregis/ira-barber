@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { Button } from "./ui/button";
 import type { ReactNode } from "react";
 import LoginDialog from "./login-dialog";
+import { serviceItems } from "@/constants/service-items";
+import { signIn, signOut, useSession } from "next-auth/react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 import {
@@ -22,7 +23,6 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "./ui/sheet";
-import { signIn, signOut, useSession } from "next-auth/react";
 
 const primaryItems = [
   {
@@ -34,81 +34,6 @@ const primaryItems = [
   {
     label: "Agendamentos",
     icon: <CalendarIcon size={16} />,
-  },
-];
-
-const serviceItems = [
-  {
-    label: "Cabelo",
-    icon: (
-      <Image
-        src="/scissors-icon.svg"
-        alt="Cabelo"
-        width={16}
-        height={16}
-        aria-hidden
-      />
-    ),
-  },
-  {
-    label: "Barba",
-    icon: (
-      <Image
-        src="/mustache-icon.svg"
-        alt="Barba"
-        width={16}
-        height={16}
-        aria-hidden
-      />
-    ),
-  },
-  {
-    label: "Acabamento",
-    icon: (
-      <Image
-        src="/razor-icon.svg"
-        alt="Acabamento"
-        width={16}
-        height={16}
-        aria-hidden
-      />
-    ),
-  },
-  {
-    label: "Sobrancelha",
-    icon: (
-      <Image
-        src="/sobrancelha.svg"
-        alt="Sobrancelha"
-        width={16}
-        height={16}
-        aria-hidden
-      />
-    ),
-  },
-  {
-    label: "Massagem",
-    icon: (
-      <Image
-        src="/massagem.svg"
-        alt="Massagem"
-        width={16}
-        height={16}
-        aria-hidden
-      />
-    ),
-  },
-  {
-    label: "Hidratação",
-    icon: (
-      <Image
-        src="/hidratacao.svg"
-        alt="Hidratação"
-        width={16}
-        height={16}
-        aria-hidden
-      />
-    ),
   },
 ];
 
