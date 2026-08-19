@@ -9,10 +9,15 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
+import { Control } from "react-hook-form";
+import { Values } from "../search-bar-form-schema";
+
 export const BarberTitleField = ({
   variant,
+  control,
 }: {
   variant: "mobile" | "desktop";
+  control: Control<Values>;
 }) => {
   const inputClass =
     variant === "mobile"
@@ -27,7 +32,8 @@ export const BarberTitleField = ({
   return (
     <>
       <FormField
-        name="title"
+        control={control}
+        name="search"
         render={({ field }) => (
           <FormItem className="w-full">
             <FormControl>

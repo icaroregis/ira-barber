@@ -18,7 +18,7 @@ export default function HomeMobile({
   popularBarbershops,
 }: HomeMobileProps) {
   return (
-    <div>
+    <div className="flex flex-1 flex-col">
       {/* HEADER */}
       <Header />
 

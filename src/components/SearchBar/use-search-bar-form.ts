@@ -4,11 +4,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, type UseFormReturn } from "react-hook-form";
 import { formSchema, Values } from "./search-bar-form-schema";
 
-export const useSearchBarForm = (): UseFormReturn<Values> => {
+export const useSearchBarForm = (
+  defaultSearch: string = "",
+): UseFormReturn<Values> => {
   return useForm<Values>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      title: "",
+      search: defaultSearch,
     },
     mode: "onBlur",
     reValidateMode: "onChange",

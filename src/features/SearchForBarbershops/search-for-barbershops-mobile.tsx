@@ -15,7 +15,7 @@ export default function SearchForBarbershopsMobile({
   barbershops,
 }: SearchForBarbershopsMobileProps) {
   return (
-    <div>
+    <div className="flex flex-1 flex-col">
       {/* HEADER */}
       <Header />
 

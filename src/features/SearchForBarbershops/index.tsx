@@ -22,13 +22,13 @@ export default async function SearchForBarbershops({
 
   return (
     <>
-      <div className="block lg:hidden">
+      <div className="flex flex-1 flex-col lg:hidden">
         <SearchForBarbershopsMobile
           searchTerm={searchTerm}
           barbershops={barbershops}
         />
       </div>
-      <div className="hidden lg:block">
+      <div className="hidden flex-1 flex-col lg:flex">
         <SearchForBarbershopsDesktop
           searchTerm={searchTerm}
           barbershops={barbershops}

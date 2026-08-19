@@ -12,13 +12,13 @@ export default async function Home() {
 
   return (
     <>
-      <div className="block lg:hidden">
+      <div className="flex flex-1 flex-col lg:hidden">
         <HomeMobile
           barbershops={barbershops}
           popularBarbershops={popularBarbershops}
         />
       </div>
-      <div className="hidden lg:block">
+      <div className="hidden flex-1 flex-col lg:flex">
         <HomeDesktop
           barbershops={barbershops}
           popularBarbershops={popularBarbershops}

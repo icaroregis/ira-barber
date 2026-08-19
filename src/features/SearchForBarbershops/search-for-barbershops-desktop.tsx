@@ -15,7 +15,7 @@ export default function SearchForBarbershopsDesktop({
   barbershops,
 }: SearchForBarbershopsDesktopProps) {
   return (
-    <div className="flex min-h-screen flex-col bg-[#141518]">
+    <div className="flex flex-1 flex-col bg-[#141518]">
       {/* HEADER */}
       <Header />
 

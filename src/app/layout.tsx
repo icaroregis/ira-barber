@@ -32,7 +32,7 @@ export default function RootLayout({
     >
       <body className="flex min-h-full flex-col" suppressHydrationWarning>
         <AuthProvider>
-          {children}
+          <div className="flex flex-1 flex-col">{children}</div>
           <Footer />
         </AuthProvider>
       </body>

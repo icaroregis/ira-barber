@@ -17,12 +17,13 @@ export default function SearchBar({
   className,
 }: SearchBarProps) {
   const router = useRouter();
-  const form = useSearchBarForm();
   const searchParams = useSearchParams();
+  const initialSearch = searchParams.get("search") ?? "";
+  const form = useSearchBarForm(initialSearch);
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     const params = new URLSearchParams(searchParams.toString());
-    params.set("search", values.title);
+    params.set("search", values.search);
     router.push(`/searchForBarbershops?${params.toString()}`);
   }
 
@@ -32,7 +33,7 @@ export default function SearchBar({
         onSubmit={form.handleSubmit(onSubmit)}
         className={className ?? "flex items-center gap-2"}
       >
-        <BarberTitleField variant={variant} />
+        <BarberTitleField variant={variant} control={form.control} />
       </form>
     </Form>
   );
