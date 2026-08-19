@@ -1,9 +1,7 @@
-import { SearchIcon } from "lucide-react";
-import { Input } from "@/components/ui/input";
 import Header from "@/components/header/header";
-import { Button } from "@/components/ui/button";
 import WelcomeGreeting from "./components/welcome-greeting";
 import BookingsSection from "./components/bookings-section";
+import SearchBar from "./components/search-bar";
 import { BarbershopItem, type Barbershop } from "./components/barbershop-item";
 import {
   ManualCarousel,
@@ -36,18 +34,7 @@ export default function HomeDesktop({
               <div className="flex flex-col gap-6">
                 <WelcomeGreeting variant="desktop" />
 
-                <div className="flex items-center gap-2">
-                  <Input
-                    placeholder="Buscar Barbearias"
-                    className="h-11 border-none bg-[#26272B] text-base text-white placeholder:text-[#838896]"
-                  />
-                  <Button
-                    size="icon"
-                    className="bg-primary hover:bg-primary/90 h-11 w-11 shrink-0 rounded-lg"
-                  >
-                    <SearchIcon size={20} />
-                  </Button>
-                </div>
+                <SearchBar variant="desktop" />
               </div>
 
               <BookingsSection />

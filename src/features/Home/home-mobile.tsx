@@ -1,11 +1,10 @@
 import Image from "next/image";
-import { SearchIcon } from "lucide-react";
-import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/header/header";
 import { Card, CardContent } from "@/components/ui/card";
 import WelcomeGreeting from "./components/welcome-greeting";
+import SearchBar from "./components/search-bar";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { BarbershopItem, type Barbershop } from "./components/barbershop-item";
 
@@ -27,17 +26,11 @@ export default function HomeMobile({
       <WelcomeGreeting variant="mobile" />
 
       {/* BUSCA */}
-      <div className="flex flex-row items-center gap-2 px-5">
-        <Input
-          placeholder="Buscar"
-          className="h-9 border-[#26272B] bg-[#1A1B1F] text-sm placeholder:text-[#838896]"
+      <div className="pt-6">
+        <SearchBar
+          variant="mobile"
+          className="flex flex-row items-center gap-2 px-5"
         />
-        <Button
-          size="icon"
-          className="bg-primary hover:bg-primary/90 h-9 w-9 rounded-lg"
-        >
-          <SearchIcon size={20} />
-        </Button>
       </div>
 
       {/* CATEGORIAS / SERVIÇOS */}
