@@ -22,9 +22,9 @@ export default function SearchBar({
   const form = useSearchBarForm(initialTitle);
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // encodeURIComponent retira caracteres especiais do título para evitar erros de codificação
-    const encodedTitle = encodeURIComponent(values.title);
-    router.push(`/searchForBarbershops?title=${encodedTitle}`);
+    router.push(
+      `/searchForBarbershops?title=${encodeURIComponent(values.title)}`,
+    );
   }
 
   return (
