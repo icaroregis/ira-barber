@@ -6,7 +6,6 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 
@@ -28,12 +27,9 @@ export const BarberTitleField = ({
   return (
     <>
       <FormField
-        name="search"
+        name="title"
         render={({ field }) => (
           <FormItem className="w-full">
-            <FormLabel className="block text-base">
-              Digite algo para buscar
-            </FormLabel>
             <FormControl>
               <Input
                 {...field}

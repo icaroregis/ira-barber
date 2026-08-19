@@ -2,10 +2,10 @@
 
 import { z } from "zod";
 import { Form } from "@/components/ui/form";
-import { useRouter } from "next/navigation";
-import { useSearchBarForm } from "./use-search-bar-form";
-import { BarberTitleField } from "./fields/barber-title-field";
 import { formSchema } from "./search-bar-form-schema";
+import { useSearchBarForm } from "./use-search-bar-form";
+import { useRouter, useSearchParams } from "next/navigation";
+import { BarberTitleField } from "./fields/barber-title-field";
 
 interface SearchBarProps {
   variant?: "mobile" | "desktop";
@@ -17,13 +17,13 @@ export default function SearchBar({
   className,
 }: SearchBarProps) {
   const router = useRouter();
-  // const searchParams = useSearchParams();
   const form = useSearchBarForm();
+  const searchParams = useSearchParams();
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    router.push(
-      `/searchForBarbershops?search=${encodeURIComponent(values.title)}`,
-    );
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("search", values.title);
+    router.push(`/searchForBarbershops?${params.toString()}`);
   }
 
   return (
