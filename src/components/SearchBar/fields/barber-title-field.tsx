@@ -35,7 +35,7 @@ export const BarberTitleField = ({
         control={control}
         name="search"
         render={({ field }) => (
-          <FormItem className="w-full">
+          <FormItem className="relative w-full space-y-0">
             <FormControl>
               <Input
                 {...field}
@@ -43,7 +43,7 @@ export const BarberTitleField = ({
                 className={inputClass}
               />
             </FormControl>
-            <FormMessage className="absolute mt-1 text-xs" />
+            <FormMessage className="absolute top-full left-0 mt-1 text-xs" />
           </FormItem>
         )}
       />
