@@ -1,5 +1,5 @@
 import Header from "@/components/header/header";
-import SearchBar from "@/features/Home/components/SearchBar";
+import SearchBar from "@/components/SearchBar";
 import {
   BarbershopItem,
   type Barbershop,
