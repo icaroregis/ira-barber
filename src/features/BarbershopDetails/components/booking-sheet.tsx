@@ -56,13 +56,12 @@ export function BookingSheet({
           </SheetTitle>
         </SheetHeader>
 
-        <div className="border-b border-[#26272B] py-6">
+        <div className="border-b border-[#26272B]">
           <Calendar
             mode="single"
             selected={date}
             onSelect={setDate}
             locale={ptBR}
-            className="mt-6"
             classNames={{
               weekday:
                 "w-full text-center text-[0.8rem] font-normal capitalize text-[#838896]",
@@ -73,21 +72,23 @@ export function BookingSheet({
         </div>
 
         {date && (
-          <div className="flex gap-3 overflow-x-auto border-b border-[#26272B] px-5 py-6 [&::-webkit-scrollbar]:hidden">
-            {TIME_SLOTS.map((timeSlot) => (
-              <Button
-                key={timeSlot}
-                variant={time === timeSlot ? "default" : "outline"}
-                className={`rounded-full ${
-                  time === timeSlot
-                    ? "bg-primary text-white"
-                    : "border-[#26272B] bg-transparent text-white hover:bg-[#26272B] hover:text-white"
-                }`}
-                onClick={() => setTime(timeSlot)}
-              >
-                {timeSlot}
-              </Button>
-            ))}
+          <div className="flex gap-3 overflow-x-auto overflow-y-hidden border-b border-[#26272B] pb-4 pl-5 [&::-webkit-scrollbar]:hidden">
+            <div className="flex gap-3">
+              {TIME_SLOTS.map((timeSlot) => (
+                <Button
+                  key={timeSlot}
+                  variant={time === timeSlot ? "default" : "outline"}
+                  className={`shrink-0 rounded-full ${
+                    time === timeSlot
+                      ? "bg-primary text-white"
+                      : "border-[#26272B] bg-transparent text-white hover:bg-[#26272B] hover:text-white"
+                  }`}
+                  onClick={() => setTime(timeSlot)}
+                >
+                  {timeSlot}
+                </Button>
+              ))}
+            </div>
           </div>
         )}
 
