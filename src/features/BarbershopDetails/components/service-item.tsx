@@ -1,17 +1,21 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { BookingSheet } from "./booking-sheet";
+import { Card, CardContent } from "@/components/ui/card";
+
 import {
   isRemoteImageUrl,
   normalizeImageUrl,
   type ServiceSerialized,
+  type BarbershopSerialized,
 } from "@/lib/utils";
-import { Card, CardContent } from "@/components/ui/card";
 
 interface ServiceItemProps {
   service: ServiceSerialized;
+  barbershop: BarbershopSerialized;
 }
 
-export function ServiceItem({ service }: ServiceItemProps) {
+export function ServiceItem({ service, barbershop }: ServiceItemProps) {
   const imageUrl = normalizeImageUrl(service.imageUrl);
 
   return (
@@ -43,12 +47,14 @@ export function ServiceItem({ service }: ServiceItemProps) {
                 currency: "BRL",
               }).format(Number(service.price))}
             </p>
-            <Button
-              variant="secondary"
-              className="h-9 rounded-lg bg-[#26272B] px-4 py-2 text-sm font-bold text-white hover:bg-[#26272B]/90"
-            >
-              Reservar
-            </Button>
+            <BookingSheet service={service} barbershop={barbershop}>
+              <Button
+                variant="secondary"
+                className="h-9 rounded-lg bg-[#26272B] px-4 py-2 text-sm font-bold text-white hover:bg-[#26272B]/90"
+              >
+                Reservar
+              </Button>
+            </BookingSheet>
           </div>
         </div>
       </CardContent>
