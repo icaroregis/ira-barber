@@ -39,7 +39,6 @@ const primaryItems = [
 
 interface SidebarSheetProps {
   children: ReactNode;
-  isAuthenticated: boolean;
 }
 
 function MenuItem({
@@ -94,11 +93,9 @@ function MenuItem({
   );
 }
 
-export default function SidebarSheet({
-  children,
-  isAuthenticated,
-}: SidebarSheetProps) {
+export default function SidebarSheet({ children }: SidebarSheetProps) {
   const { data: session } = useSession();
+  const isAuthenticated = !!session?.user;
 
   const handleLoginWithGoogleClick = async () => {
     await signIn("google");

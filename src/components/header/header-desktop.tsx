@@ -39,7 +39,7 @@ export default function HeaderDesktop() {
               <CalendarIcon size={16} />
               Agendamentos
             </Button>
-            <SidebarSheet isAuthenticated={isAuthenticated}>
+            <SidebarSheet>
               <button
                 type="button"
                 className="flex items-center gap-2 rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-white/30"
@@ -66,7 +66,7 @@ export default function HeaderDesktop() {
               <CalendarIcon size={16} />
               Agendamentos
             </Button>
-            <SidebarSheet isAuthenticated={isAuthenticated}>
+            <SidebarSheet>
               <Button className="bg-primary hover:bg-primary/90 flex items-center gap-2 rounded-lg px-6 text-sm font-bold text-white">
                 <LogInIcon size={16} />
                 Perfil

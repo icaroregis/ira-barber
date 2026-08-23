@@ -9,7 +9,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { BarbershopSerialized, ServiceSerialized } from "@/lib/utils";
 import {
   Sheet,
+  SheetClose,
   SheetContent,
+  SheetFooter,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
@@ -56,6 +58,7 @@ export function BookingSheet({
           </SheetTitle>
         </SheetHeader>
 
+        {/* Calendário */}
         <div className="border-b border-[#26272B]">
           <Calendar
             mode="single"
@@ -71,6 +74,7 @@ export function BookingSheet({
           />
         </div>
 
+        {/* Lista de horários */}
         {date && (
           <div className="flex gap-3 overflow-x-auto overflow-y-hidden border-b border-[#26272B] pb-4 pl-5 [&::-webkit-scrollbar]:hidden">
             <div className="flex gap-3">
@@ -92,6 +96,7 @@ export function BookingSheet({
           </div>
         )}
 
+        {/* Resumo da reserva */}
         <div className="p-5">
           <Card className="border-[#26272B] bg-[#1A1B1F]">
             <CardContent className="flex flex-col gap-3 p-3">
@@ -131,14 +136,16 @@ export function BookingSheet({
           </Card>
         </div>
 
-        <div className="mt-6 px-5">
-          <Button
-            className="bg-primary w-full font-bold text-white"
-            disabled={!date || !time}
-          >
-            Confirmar reserva
-          </Button>
-        </div>
+        <SheetFooter className="m-0 px-5 pb-6">
+          <SheetClose asChild>
+            <Button
+              className="bg-primary w-full font-bold text-white"
+              disabled={!date || !time}
+            >
+              Confirmar reserva
+            </Button>
+          </SheetClose>
+        </SheetFooter>
       </SheetContent>
     </Sheet>
   );
