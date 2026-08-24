@@ -3,9 +3,10 @@ import NextAuth, { AuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 
-export const authOptions: AuthOptions = {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  adapter: PrismaAdapter(db) as any,
+type PrismaAdapterClient = Parameters<typeof PrismaAdapter>[0];
+
+export const authOptions = {
+  adapter: PrismaAdapter(db as PrismaAdapterClient),
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID as string,
@@ -23,20 +24,14 @@ export const authOptions: AuthOptions = {
       return token;
     },
     async session({ session, token }) {
-      if (session.user) {
-        session.user = {
-          ...session.user,
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          id: token.id as any,
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        } as any;
+      if (session.user && token.id) {
+        session.user.id = token.id;
       }
       return session;
     },
   },
   secret: process.env.NEXTAUTH_SECRET,
-};
+} satisfies AuthOptions;
 
 const handler = NextAuth(authOptions);
-
 export { handler as GET, handler as POST };
