@@ -10,6 +10,7 @@ interface CreateBookingParams {
 }
 
 export const createBooking = async (data: CreateBookingParams) => {
+  // O id está sendo resgatado aqui do servidor por questão de segurança, no cliente alguém pode roubar o id do usuário e fazer um agendamento com esse id.
   const userSession = await getServerSession(authOptions);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const userId = (userSession?.user as any)?.id;
