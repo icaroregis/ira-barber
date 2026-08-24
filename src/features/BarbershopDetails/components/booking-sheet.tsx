@@ -1,14 +1,17 @@
 "use client";
 
-import { useState } from "react";
-import { format, set } from "date-fns";
+import { useEffect, useMemo, useState } from "react";
+import { format, set, startOfToday } from "date-fns";
 import { toast } from "react-toastify";
 import { ptBR } from "date-fns/locale";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Card, CardContent } from "@/components/ui/card";
-import { createBooking } from "@/actions/create-booking";
 import { BarbershopSerialized, ServiceSerialized } from "@/lib/utils";
+
+// server actions
+import { getBookings } from "@/actions/get-bookings";
+import { createBooking } from "@/actions/create-booking";
 
 import {
   Sheet,
@@ -50,10 +53,62 @@ export function BookingSheet({
 }: BookingSheetProps) {
   const [date, setDate] = useState<Date | undefined>(undefined);
   const [time, setTime] = useState<string | undefined>(undefined);
+  const [bookedTimes, setBookedTimes] = useState<string[]>([]);
+  const [isLoadingBookings, setIsLoadingBookings] = useState(false);
+
+  const handleDateSelect = (selectedDate: Date | undefined) => {
+    setDate(selectedDate);
+    setTime(undefined);
+  };
+
+  useEffect(() => {
+    const loadBookings = async () => {
+      if (!date) {
+        setBookedTimes([]);
+        return;
+      }
+
+      setBookedTimes([]);
+      setIsLoadingBookings(true);
+
+      try {
+        const bookings = await getBookings({
+          serviceId: service.id,
+          date,
+        });
+
+        const reservedTimes = bookings.map((booking) =>
+          format(new Date(booking.date), "HH:mm"),
+        );
+
+        setBookedTimes(reservedTimes);
+        setTime((currentTime) =>
+          currentTime && reservedTimes.includes(currentTime)
+            ? undefined
+            : currentTime,
+        );
+      } catch (error) {
+        console.error(error);
+        toast.error("Erro ao buscar horários reservados");
+        setBookedTimes([]);
+      } finally {
+        setIsLoadingBookings(false);
+      }
+    };
+
+    void loadBookings();
+  }, [date, service.id]);
+
+  const availableTimeSlots = useMemo(
+    () =>
+      TIME_SLOTS.map((timeSlot) => ({
+        value: timeSlot,
+        isBooked: bookedTimes.includes(timeSlot),
+      })),
+    [bookedTimes],
+  );
 
   const handleCreateBooking = async () => {
-    // 1. Não exibir horários que já foram agendados
-    // 2. Salvar o agendamento para o usuário logado
     try {
       if (!date || !time) return;
       const hours = Number(time.split(":")[0]);
@@ -69,6 +124,11 @@ export function BookingSheet({
         serviceId: service.id,
         date: newDate,
       });
+
+      setBookedTimes((currentBookedTimes) =>
+        Array.from(new Set([...currentBookedTimes, time])),
+      );
+      setTime(undefined);
       toast.success("Reserva criada com sucesso!");
     } catch (error) {
       console.error(error);
@@ -91,7 +151,8 @@ export function BookingSheet({
           <Calendar
             mode="single"
             selected={date}
-            onSelect={setDate}
+            onSelect={handleDateSelect}
+            disabled={{ before: startOfToday() }}
             locale={ptBR}
             classNames={{
               weekday:
@@ -106,23 +167,36 @@ export function BookingSheet({
         {date && (
           <div className="flex gap-3 overflow-x-auto overflow-y-hidden border-b border-[#26272B] pb-4 pl-5 [&::-webkit-scrollbar]:hidden">
             <div className="flex gap-3">
-              {TIME_SLOTS.map((timeSlot) => (
+              {availableTimeSlots.map(({ value, isBooked }) => (
                 <Button
-                  key={timeSlot}
-                  variant={time === timeSlot ? "default" : "outline"}
+                  key={value}
+                  variant={time === value ? "default" : "outline"}
                   className={`shrink-0 rounded-full ${
-                    time === timeSlot
-                      ? "bg-primary text-white"
-                      : "border-[#26272B] bg-transparent text-white hover:bg-[#26272B] hover:text-white"
+                    isBooked
+                      ? "cursor-not-allowed border-[#26272B] bg-[#1A1B1F] text-[#838896] opacity-50 hover:bg-[#1A1B1F] hover:text-[#838896]"
+                      : time === value
+                        ? "bg-primary text-white"
+                        : "border-[#26272B] bg-transparent text-white hover:bg-[#26272B] hover:text-white"
                   }`}
-                  onClick={() => setTime(timeSlot)}
+                  disabled={isLoadingBookings || isBooked}
+                  onClick={() => setTime(value)}
                 >
-                  {timeSlot}
+                  {value}
                 </Button>
               ))}
             </div>
           </div>
         )}
+
+        {date &&
+          !isLoadingBookings &&
+          availableTimeSlots.every(({ isBooked }) => isBooked) && (
+            <div className="border-b border-[#26272B] px-5 py-4">
+              <p className="text-sm text-[#838896]">
+                Todos os horários desse dia já estão reservados.
+              </p>
+            </div>
+          )}
 
         {/* Resumo da reserva */}
         <div className="p-5">
