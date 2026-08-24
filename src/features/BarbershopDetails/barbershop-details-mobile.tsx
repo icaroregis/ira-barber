@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -22,7 +20,6 @@ export default function BarbershopDetailsMobile({
   barbershop,
 }: BarbershopDetailsMobileProps) {
   const imageUrl = normalizeImageUrl(barbershop.imageUrl);
-
   return (
     <div className="flex min-h-screen flex-col bg-[#141518]">
       <main className="flex-1">

@@ -1,12 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { format } from "date-fns";
+import { format, set } from "date-fns";
+import { toast } from "react-toastify";
 import { ptBR } from "date-fns/locale";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Card, CardContent } from "@/components/ui/card";
+import { createBooking } from "@/actions/create-booking";
 import { BarbershopSerialized, ServiceSerialized } from "@/lib/utils";
+
 import {
   Sheet,
   SheetClose,
@@ -47,6 +50,31 @@ export function BookingSheet({
 }: BookingSheetProps) {
   const [date, setDate] = useState<Date | undefined>(undefined);
   const [time, setTime] = useState<string | undefined>(undefined);
+
+  const handleCreateBooking = async () => {
+    // 1. Não exibir horários que já foram agendados
+    // 2. Salvar o agendamento para o usuário logado
+    try {
+      if (!date || !time) return;
+      const hours = Number(time.split(":")[0]);
+      const minutes = Number(time.split(":")[1]);
+      const newDate = set(date, {
+        hours,
+        minutes,
+        seconds: 0,
+        milliseconds: 0,
+      });
+
+      await createBooking({
+        serviceId: service.id,
+        date: newDate,
+      });
+      toast.success("Reserva criada com sucesso!");
+    } catch (error) {
+      console.error(error);
+      toast.error("Erro ao criar reserva");
+    }
+  };
 
   return (
     <Sheet>
@@ -141,6 +169,7 @@ export function BookingSheet({
             <Button
               className="bg-primary w-full font-bold text-white"
               disabled={!date || !time}
+              onClick={handleCreateBooking}
             >
               Confirmar reserva
             </Button>

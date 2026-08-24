@@ -1,7 +1,9 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import AuthProvider from "@/contexts/auth";
+import "react-toastify/dist/ReactToastify.css";
 import Footer from "@/components/footer/footer";
+import { ToastContainer } from "react-toastify";
 import { Geist, Geist_Mono } from "next/font/google";
 
 const geistSans = Geist({
@@ -35,6 +37,7 @@ export default function RootLayout({
           <div className="flex flex-1 flex-col">{children}</div>
           <Footer />
         </AuthProvider>
+        <ToastContainer position="bottom-right" />
       </body>
     </html>
   );
