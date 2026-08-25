@@ -1,15 +1,15 @@
 import BookingsMobile from "./bookings-mobile";
-import BookingsDesktop from "./bookings-desktop";
+import { ResponsiveLayout } from "@/components/responsive-layout";
 
 export default async function Bookings() {
   return (
-    <>
-      <div className="block lg:hidden">
-        <BookingsMobile />
-      </div>
-      <div className="hidden lg:block">
-        <BookingsDesktop />
-      </div>
-    </>
+    <ResponsiveLayout
+      mobile={<BookingsMobile />}
+      desktop={
+        <div className="mx-auto min-h-screen max-w-[500px] border-x border-[#26272B]">
+          <BookingsMobile />
+        </div>
+      }
+    />
   );
 }

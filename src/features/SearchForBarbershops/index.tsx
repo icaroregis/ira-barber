@@ -1,6 +1,8 @@
 import { db } from "@/lib/prisma";
+import { ResponsiveLayout } from "@/components/responsive-layout";
 import SearchForBarbershopsMobile from "./search-for-barbershops-mobile";
 import SearchForBarbershopsDesktop from "./search-for-barbershops-desktop";
+
 interface SearchForBarbershopsProps {
   title?: string;
   service?: string;
@@ -38,19 +40,23 @@ export default async function SearchForBarbershops({
   });
 
   return (
-    <>
-      <div className="flex flex-1 flex-col lg:hidden">
-        <SearchForBarbershopsMobile
-          searchTerm={title || service || ""}
-          barbershops={barbershops}
-        />
-      </div>
-      <div className="hidden flex-1 flex-col lg:flex">
-        <SearchForBarbershopsDesktop
-          searchTerm={title || service || ""}
-          barbershops={barbershops}
-        />
-      </div>
-    </>
+    <ResponsiveLayout
+      mobile={
+        <div className="flex flex-1 flex-col">
+          <SearchForBarbershopsMobile
+            searchTerm={title || service || ""}
+            barbershops={barbershops}
+          />
+        </div>
+      }
+      desktop={
+        <div className="flex flex-1 flex-col">
+          <SearchForBarbershopsDesktop
+            searchTerm={title || service || ""}
+            barbershops={barbershops}
+          />
+        </div>
+      }
+    />
   );
 }

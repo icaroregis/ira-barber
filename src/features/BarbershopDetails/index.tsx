@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { serializeBarbershop } from "@/lib/utils";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import BarbershopDetailsMobile from "./barbershop-details-mobile";
+import { ResponsiveLayout } from "@/components/responsive-layout";
 import BarbershopDetailsDesktop from "./barbershop-details-desktop";
 
 export default async function BarbershopDetails({ id }: { id: string }) {
@@ -26,19 +27,19 @@ export default async function BarbershopDetails({ id }: { id: string }) {
   const isAuthenticated = !!session?.user;
 
   return (
-    <>
-      <div className="block lg:hidden">
+    <ResponsiveLayout
+      mobile={
         <BarbershopDetailsMobile
           barbershop={barbershopSerialized}
           isAuthenticated={isAuthenticated}
         />
-      </div>
-      <div className="hidden lg:block">
+      }
+      desktop={
         <BarbershopDetailsDesktop
           barbershop={barbershopSerialized}
           isAuthenticated={isAuthenticated}
         />
-      </div>
-    </>
+      }
+    />
   );
 }
