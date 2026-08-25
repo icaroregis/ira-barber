@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { format, set, startOfToday } from "date-fns";
 import { toast } from "react-toastify";
 import { ptBR } from "date-fns/locale";
@@ -46,35 +46,34 @@ const TIME_SLOTS = [
   "18:15",
 ];
 
+// → ABRIR sheet (open=true, tem date selecionada):
+//   → CHAMA loadBookings(date)  ← sempre recarrega dados do servidor!
+
+// → FECHAR sheet (open=false):
+//   → setBookedTimes([])
+//   → setIsLoadingBookings(false)
+//   → setTime(undefined)        ← limpa TUDO
+
 export function BookingSheet({
   children,
   service,
   barbershop,
 }: BookingSheetProps) {
+  const [isOpen, setIsOpen] = useState(false);
   const [date, setDate] = useState<Date | undefined>(undefined);
   const [time, setTime] = useState<string | undefined>(undefined);
   const [bookedTimes, setBookedTimes] = useState<string[]>([]);
   const [isLoadingBookings, setIsLoadingBookings] = useState(false);
 
-  const handleDateSelect = (selectedDate: Date | undefined) => {
-    setDate(selectedDate);
-    setTime(undefined);
-  };
-
-  useEffect(() => {
-    const loadBookings = async () => {
-      if (!date) {
-        setBookedTimes([]);
-        return;
-      }
-
+  const loadBookings = useCallback(
+    async (targetDate: Date) => {
       setBookedTimes([]);
       setIsLoadingBookings(true);
 
       try {
         const bookings = await getBookings({
-          serviceId: service.id,
-          date,
+          barbershopId: barbershop.id,
+          date: targetDate,
         });
 
         const reservedTimes = bookings.map((booking) =>
@@ -94,10 +93,30 @@ export function BookingSheet({
       } finally {
         setIsLoadingBookings(false);
       }
-    };
+    },
+    [barbershop.id],
+  );
 
-    void loadBookings();
-  }, [date, service.id]);
+  const handleOpenChange = (open: boolean) => {
+    setIsOpen(open);
+    if (!open) {
+      setBookedTimes([]);
+      setIsLoadingBookings(false);
+      setTime(undefined);
+    } else if (date) {
+      void loadBookings(date);
+    }
+  };
+
+  const handleDateSelect = (selectedDate: Date | undefined) => {
+    setDate(selectedDate);
+    setTime(undefined);
+    if (selectedDate) {
+      void loadBookings(selectedDate);
+    } else {
+      setBookedTimes([]);
+    }
+  };
 
   const availableTimeSlots = useMemo(
     () =>
@@ -137,7 +156,7 @@ export function BookingSheet({
   };
 
   return (
-    <Sheet>
+    <Sheet open={isOpen} onOpenChange={handleOpenChange}>
       <SheetTrigger asChild>{children}</SheetTrigger>
       <SheetContent className="min-w-[350px] overflow-y-auto border-l border-[#26272B] bg-[#141518] px-0 py-6">
         <SheetHeader className="border-b border-[#26272B] px-5 pb-6 text-left">
