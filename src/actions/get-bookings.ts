@@ -2,6 +2,7 @@
 
 import { db } from "@/lib/prisma";
 import { endOfDay, startOfDay } from "date-fns";
+import { unstable_noStore } from "next/cache";
 
 interface GetBookingsParams {
   barbershopId: string;
@@ -9,6 +10,8 @@ interface GetBookingsParams {
 }
 
 export const getBookings = async (data: GetBookingsParams) => {
+  unstable_noStore();
+
   return await db.booking.findMany({
     where: {
       service: {

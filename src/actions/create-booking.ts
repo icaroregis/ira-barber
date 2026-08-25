@@ -2,6 +2,7 @@
 
 import { db } from "@/lib/prisma";
 import { getServerSession } from "next-auth";
+import { unstable_noStore } from "next/cache";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 interface CreateBookingParams {
@@ -10,6 +11,8 @@ interface CreateBookingParams {
 }
 
 export const createBooking = async (data: CreateBookingParams) => {
+  unstable_noStore();
+
   const userSession = await getServerSession(authOptions);
   const userId = userSession?.user?.id;
 

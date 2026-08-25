@@ -103,6 +103,7 @@ export function BookingSheet({
       setBookedTimes([]);
       setIsLoadingBookings(false);
       setTime(undefined);
+      setDate(undefined);
     } else if (date) {
       void loadBookings(date);
     }
