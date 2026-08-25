@@ -34,6 +34,8 @@ const primaryItems = [
   {
     label: "Agendamentos",
     icon: <CalendarIcon size={16} />,
+    active: false,
+    href: "/bookings",
   },
 ];
 
