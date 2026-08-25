@@ -1,5 +1,5 @@
-import BookingsDesktop from "@/features/Bookings/bookings-desktop";
+import BookingsFeature from "@/features/Bookings";
 
-export default function Bookings() {
-  return <BookingsDesktop />;
+export default function BookingsPage() {
+  return <BookingsFeature />;
 }

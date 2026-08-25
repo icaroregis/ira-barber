@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from "react";
 import { z } from "zod";
 import { Form } from "@/components/ui/form";
 import { formSchema } from "./search-bar-form-schema";
@@ -12,10 +13,7 @@ interface SearchBarProps {
   className?: string;
 }
 
-export default function SearchBar({
-  variant = "mobile",
-  className,
-}: SearchBarProps) {
+function SearchBarContent({ variant = "mobile", className }: SearchBarProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const initialTitle = searchParams.get("title") ?? "";
@@ -36,5 +34,13 @@ export default function SearchBar({
         <BarberTitleField variant={variant} control={form.control} />
       </form>
     </Form>
+  );
+}
+
+export default function SearchBar(props: SearchBarProps) {
+  return (
+    <Suspense fallback={<div>Carregando busca...</div>}>
+      <SearchBarContent {...props} />
+    </Suspense>
   );
 }

@@ -1,12 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Badge } from "@/components/ui/badge";
 import SearchBar from "@/components/SearchBar";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/header/header";
-import { Card, CardContent } from "@/components/ui/card";
 import WelcomeGreeting from "./components/welcome-greeting";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import BookingsSection from "./components/bookings-section";
 import { BarbershopItem, type Barbershop } from "./components/barbershop-item";
 import { serviceItems } from "@/constants/service-items";
 
@@ -89,37 +87,8 @@ export default function HomeMobile({
       </div>
 
       {/* AGENDAMENTOS */}
-      <div className="flex flex-col gap-3 px-5 pt-6 pb-6">
-        <h2 className="text-xs font-bold text-[#838896]">AGENDAMENTOS</h2>
-        <Card className="rounded-xl border-[#26272B] bg-[#1A1B1F]">
-          <CardContent className="flex flex-row p-0">
-            {/* Lado Esquerdo - Info */}
-            <div className="flex flex-1 flex-col gap-2 py-3 pr-5 pl-3">
-              <Badge className="text-primary w-fit bg-[#221C3D] text-xs font-bold hover:bg-[#221C3D]">
-                Confirmado
-              </Badge>
-
-              <h3 className="text-base font-bold text-white">
-                Corte de Cabelo
-              </h3>
-
-              <div className="flex flex-row items-center gap-2">
-                <Avatar className="h-6 w-6">
-                  <AvatarImage src="/avatar.png" alt="Vintage Barber" />
-                  <AvatarFallback>VB</AvatarFallback>
-                </Avatar>
-                <p className="text-sm font-normal text-white">Vintage Barber</p>
-              </div>
-            </div>
-
-            {/* Lado Direito - Data/Hora */}
-            <div className="flex w-26.5 shrink-0 flex-col items-center justify-center border-l border-solid border-[#26272B] px-9 py-3">
-              <p className="text-xs text-white">Fevereiro</p>
-              <p className="text-2xl font-normal text-white">06</p>
-              <p className="text-xs text-white">09:45</p>
-            </div>
-          </CardContent>
-        </Card>
+      <div className="px-5 pt-6 pb-6">
+        <BookingsSection />
       </div>
 
       {/* Recomendados */}
