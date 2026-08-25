@@ -1,5 +1,5 @@
-import BookingsFeature from "@/features/Bookings";
+import Bookings from "@/features/Bookings";
 
 export default function BookingsPage() {
-  return <BookingsFeature />;
+  return <Bookings />;
 }
