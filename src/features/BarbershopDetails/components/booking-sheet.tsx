@@ -7,7 +7,9 @@ import { ptBR } from "date-fns/locale";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Card, CardContent } from "@/components/ui/card";
+import LoginDialog from "@/components/login-dialog";
 import { BarbershopSerialized, ServiceSerialized } from "@/lib/utils";
+import { useSession } from "next-auth/react";
 
 // server actions
 import { getBookings } from "@/actions/get-bookings";
@@ -59,6 +61,9 @@ export function BookingSheet({
   service,
   barbershop,
 }: BookingSheetProps) {
+  const { data: session } = useSession();
+  const isAuthenticated = !!session?.user;
+
   const [isOpen, setIsOpen] = useState(false);
   const [date, setDate] = useState<Date | undefined>(undefined);
   const [time, setTime] = useState<string | undefined>(undefined);
@@ -155,6 +160,10 @@ export function BookingSheet({
       toast.error("Erro ao criar reserva");
     }
   };
+
+  if (!isAuthenticated) {
+    return <LoginDialog>{children}</LoginDialog>;
+  }
 
   return (
     <Sheet open={isOpen} onOpenChange={handleOpenChange}>

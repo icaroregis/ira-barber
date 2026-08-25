@@ -14,10 +14,12 @@ import {
 
 interface BarbershopDetailsMobileProps {
   barbershop: BarbershopSerialized;
+  isAuthenticated: boolean;
 }
 
 export default function BarbershopDetailsMobile({
   barbershop,
+  isAuthenticated,
 }: BarbershopDetailsMobileProps) {
   const imageUrl = normalizeImageUrl(barbershop.imageUrl);
   return (
@@ -98,6 +100,7 @@ export default function BarbershopDetailsMobile({
                   key={service.id}
                   service={service}
                   barbershop={barbershop}
+                  isAuthenticated={isAuthenticated}
                 />
               ))}
             </div>

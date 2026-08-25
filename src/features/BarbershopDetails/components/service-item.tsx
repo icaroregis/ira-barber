@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import LoginDialog from "@/components/login-dialog";
 import { BookingSheet } from "./booking-sheet";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -13,9 +14,14 @@ import {
 interface ServiceItemProps {
   service: ServiceSerialized;
   barbershop: BarbershopSerialized;
+  isAuthenticated: boolean;
 }
 
-export function ServiceItem({ service, barbershop }: ServiceItemProps) {
+export function ServiceItem({
+  service,
+  barbershop,
+  isAuthenticated,
+}: ServiceItemProps) {
   const imageUrl = normalizeImageUrl(service.imageUrl);
 
   return (
@@ -47,14 +53,25 @@ export function ServiceItem({ service, barbershop }: ServiceItemProps) {
                 currency: "BRL",
               }).format(Number(service.price))}
             </p>
-            <BookingSheet service={service} barbershop={barbershop}>
-              <Button
-                variant="secondary"
-                className="h-9 rounded-lg bg-[#26272B] px-4 py-2 text-sm font-bold text-white hover:bg-[#26272B]/90"
-              >
-                Reservar
-              </Button>
-            </BookingSheet>
+            {isAuthenticated ? (
+              <BookingSheet service={service} barbershop={barbershop}>
+                <Button
+                  variant="secondary"
+                  className="h-9 rounded-lg bg-[#26272B] px-4 py-2 text-sm font-bold text-white hover:bg-[#26272B]/90"
+                >
+                  Reservar
+                </Button>
+              </BookingSheet>
+            ) : (
+              <LoginDialog>
+                <Button
+                  variant="secondary"
+                  className="h-9 rounded-lg bg-[#26272B] px-4 py-2 text-sm font-bold text-white hover:bg-[#26272B]/90"
+                >
+                  Reservar
+                </Button>
+              </LoginDialog>
+            )}
           </div>
         </div>
       </CardContent>

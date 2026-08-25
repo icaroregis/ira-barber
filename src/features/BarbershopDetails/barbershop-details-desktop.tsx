@@ -22,10 +22,12 @@ const OPENING_HOURS = [
 
 interface BarbershopDetailsDesktopProps {
   barbershop: BarbershopSerialized;
+  isAuthenticated: boolean;
 }
 
 export default function BarbershopDetailsDesktop({
   barbershop,
+  isAuthenticated,
 }: BarbershopDetailsDesktopProps) {
   const imageUrl = normalizeImageUrl(barbershop.imageUrl);
 
@@ -83,6 +85,7 @@ export default function BarbershopDetailsDesktop({
                     key={service.id}
                     service={service}
                     barbershop={barbershop}
+                    isAuthenticated={isAuthenticated}
                   />
                 ))}
               </div>
