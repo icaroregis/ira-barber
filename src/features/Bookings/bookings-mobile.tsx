@@ -1,7 +1,28 @@
 import Header from "@/components/header/header";
 import { BookingItem } from "@/components/booking-item";
+import { Prisma } from "@/generated/prisma/client/client";
+import { format, isFuture, isPast } from "date-fns";
+import { ptBR } from "date-fns/locale";
 
-export default function BookingsMobile() {
+interface BookingsMobileProps {
+  // Aqui estamos trazendo os dados do agendamento, incluindo o nome do serviço e a barbearia
+  bookings: Prisma.BookingGetPayload<{
+    include: {
+      service: {
+        include: {
+          barbershop: true;
+        };
+      };
+    };
+  }>[];
+}
+
+export default function BookingsMobile({ bookings }: BookingsMobileProps) {
+  const confirmedBookings = bookings.filter((booking) =>
+    isFuture(booking.date),
+  );
+  const finishedBookings = bookings.filter((booking) => isPast(booking.date));
+
   return (
     <div className="flex flex-1 flex-col">
       <Header />
@@ -9,51 +30,45 @@ export default function BookingsMobile() {
       <div className="flex flex-col gap-3 px-5 py-6">
         <h1 className="mb-3 text-xl font-bold text-white">Agendamentos</h1>
 
-        {/* Confirmados */}
-        <div className="mb-6 flex flex-col gap-3">
-          <h2 className="text-xs font-bold text-[#838896] uppercase">
-            CONFIRMADOS
-          </h2>
-          <BookingItem
-            status="Confirmado"
-            serviceName="Corte de Cabelo"
-            barbershopName="Vintage Barber"
-            month="Agosto"
-            day="06"
-            time="09:45"
-          />
-        </div>
+        {confirmedBookings.length > 0 && (
+          <div className="mb-6 flex flex-col gap-3">
+            <h2 className="text-xs font-bold text-[#838896] uppercase">
+              CONFIRMADOS
+            </h2>
+            {confirmedBookings.map((booking) => (
+              <BookingItem
+                key={booking.id}
+                status="Confirmado"
+                serviceName={booking.service.name}
+                barbershopName={booking.service.barbershop.name}
+                barbershopAvatar={booking.service.barbershop.imageUrl}
+                month={format(booking.date, "MMMM", { locale: ptBR })}
+                day={format(booking.date, "dd")}
+                time={format(booking.date, "HH:mm")}
+              />
+            ))}
+          </div>
+        )}
 
-        {/* Finalizados */}
-        <div className="flex flex-col gap-3">
-          <h2 className="text-xs font-bold text-[#838896] uppercase">
-            FINALIZADOS
-          </h2>
-          <BookingItem
-            status="Finalizado"
-            serviceName="Corte de Cabelo"
-            barbershopName="Vintage Barber"
-            month="Julho"
-            day="22"
-            time="09:00"
-          />
-          <BookingItem
-            status="Finalizado"
-            serviceName="Corte de Cabelo"
-            barbershopName="Vintage Barber"
-            month="Julho"
-            day="07"
-            time="12:40"
-          />
-          <BookingItem
-            status="Finalizado"
-            serviceName="Corte de Cabelo"
-            barbershopName="Vintage Barber"
-            month="Junho"
-            day="23"
-            time="19:10"
-          />
-        </div>
+        {finishedBookings.length > 0 && (
+          <div className="flex flex-col gap-3">
+            <h2 className="text-xs font-bold text-[#838896] uppercase">
+              FINALIZADOS
+            </h2>
+            {finishedBookings.map((booking) => (
+              <BookingItem
+                key={booking.id}
+                status="Finalizado"
+                serviceName={booking.service.name}
+                barbershopName={booking.service.barbershop.name}
+                barbershopAvatar={booking.service.barbershop.imageUrl}
+                month={format(booking.date, "MMMM", { locale: ptBR })}
+                day={format(booking.date, "dd")}
+                time={format(booking.date, "HH:mm")}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
