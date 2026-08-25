@@ -1,27 +1,18 @@
-import Header from "@/components/header/header";
-import { BookingItem } from "@/components/booking-item";
-import { Prisma } from "@/generated/prisma/client/client";
-import { format, isFuture, isPast } from "date-fns";
 import { ptBR } from "date-fns/locale";
+import Header from "@/components/header/header";
+import { format } from "date-fns";
+import { BookingItem } from "@/components/booking-item";
+import { BookingSerialized } from "@/lib/utils";
 
 interface BookingsMobileProps {
-  bookings: Prisma.BookingGetPayload<{
-    include: {
-      service: {
-        include: {
-          barbershop: true;
-        };
-      };
-    };
-  }>[];
+  confirmedBookings: BookingSerialized[];
+  finishedBookings: BookingSerialized[];
 }
 
-export default function BookingsMobile({ bookings }: BookingsMobileProps) {
-  const confirmedBookings = bookings.filter((booking) =>
-    isFuture(booking.date),
-  );
-  const finishedBookings = bookings.filter((booking) => isPast(booking.date));
-
+export default function BookingsMobile({
+  confirmedBookings,
+  finishedBookings,
+}: BookingsMobileProps) {
   return (
     <div className="flex flex-1 flex-col">
       <Header />
@@ -41,9 +32,9 @@ export default function BookingsMobile({ bookings }: BookingsMobileProps) {
                 serviceName={booking.service.name}
                 barbershopName={booking.service.barbershop.name}
                 barbershopAvatar={booking.service.barbershop.imageUrl}
-                month={format(booking.date, "MMMM", { locale: ptBR })}
-                day={format(booking.date, "dd")}
-                time={format(booking.date, "HH:mm")}
+                month={format(new Date(booking.date), "MMMM", { locale: ptBR })}
+                day={format(new Date(booking.date), "dd")}
+                time={format(new Date(booking.date), "HH:mm")}
               />
             ))
           ) : (
@@ -65,9 +56,9 @@ export default function BookingsMobile({ bookings }: BookingsMobileProps) {
                 serviceName={booking.service.name}
                 barbershopName={booking.service.barbershop.name}
                 barbershopAvatar={booking.service.barbershop.imageUrl}
-                month={format(booking.date, "MMMM", { locale: ptBR })}
-                day={format(booking.date, "dd")}
-                time={format(booking.date, "HH:mm")}
+                month={format(new Date(booking.date), "MMMM", { locale: ptBR })}
+                day={format(new Date(booking.date), "dd")}
+                time={format(new Date(booking.date), "HH:mm")}
               />
             ))
           ) : (

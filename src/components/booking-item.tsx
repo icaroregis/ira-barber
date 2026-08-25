@@ -10,6 +10,8 @@ interface BookingItemProps {
   month?: string;
   day?: string;
   time?: string;
+  onClick?: () => void;
+  isActive?: boolean;
 }
 
 export function BookingItem({
@@ -20,11 +22,18 @@ export function BookingItem({
   month = "Fevereiro",
   day = "06",
   time = "09:45",
+  onClick,
+  isActive,
 }: BookingItemProps) {
   const isConfirmed = status === "Confirmado";
 
   return (
-    <Card className="rounded-xl border-[#26272B] bg-[#1A1B1F]">
+    <Card
+      onClick={onClick}
+      className={`rounded-xl border-[#26272B] bg-[#1A1B1F] ${
+        onClick ? "cursor-pointer hover:border-gray-500" : ""
+      } ${isActive ? "border-gray-500 bg-[#26272B]/30" : ""}`}
+    >
       <CardContent className="flex p-0">
         {/* Lado Esquerdo - Info */}
         <div className="flex flex-1 flex-col gap-2 py-3 pr-5 pl-3">
