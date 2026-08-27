@@ -1,5 +1,5 @@
+import { isFuture } from "date-fns";
 import { Badge } from "@/components/ui/badge";
-import { format, isFuture } from "date-fns";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
@@ -26,8 +26,7 @@ export function BookingItem({
   onClick,
   isActive,
 }: BookingItemProps) {
-  const isConfirmed =
-    typeof status === "string" ? status === "Confirmado" : isFuture(status);
+  const isConfirmed = isFuture(status);
 
   return (
     <Card
@@ -46,9 +45,7 @@ export function BookingItem({
                 : "bg-[#26272B] text-[#838896] hover:bg-[#26272B]"
             }`}
           >
-            {typeof status === "string"
-              ? status
-              : format(status, "yyyy-MM-dd HH:mm")}
+            {isConfirmed ? "Confirmado" : "Concluído"}
           </Badge>
           <h3 className="text-base font-bold text-white">{serviceName}</h3>
           <div className="flex items-center gap-2">

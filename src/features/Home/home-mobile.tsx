@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { format, isFuture } from "date-fns";
+import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import SearchBar from "@/components/SearchBar";
 import { Button } from "@/components/ui/button";
@@ -102,7 +102,7 @@ export default function HomeMobile({
             {bookings.map((booking) => (
               <div key={booking.id} className="min-w-[90%] shrink-0">
                 <BookingItem
-                  status={isFuture(booking.date) ? "Confirmado" : "Concluído"}
+                  status={booking.date}
                   serviceName={booking.service.name}
                   barbershopName={booking.service.barbershop.name}
                   barbershopAvatar={booking.service.barbershop.imageUrl}
