@@ -20,9 +20,6 @@ export default async function Home() {
     ? await db.booking.findMany({
         where: {
           userId: session.user.id,
-          date: {
-            gte: new Date(),
-          },
         },
         include: {
           service: {
