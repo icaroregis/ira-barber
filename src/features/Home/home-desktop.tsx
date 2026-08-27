@@ -1,15 +1,16 @@
+import { format } from "date-fns";
+import { ptBR } from "date-fns/locale";
 import SearchBar from "@/components/SearchBar";
 import Header from "@/components/header/header";
+import { BookingSerialized } from "@/lib/utils";
+import { BookingItem } from "@/components/booking-item";
 import WelcomeGreeting from "./components/welcome-greeting";
 import { BarbershopItem, type Barbershop } from "./components/barbershop-item";
+
 import {
   ManualCarousel,
   ManualCarouselItem,
 } from "@/components/manual-carousel";
-import { BookingItem } from "@/components/booking-item";
-import { BookingSerialized } from "@/lib/utils";
-import { format } from "date-fns";
-import { ptBR } from "date-fns/locale";
 
 interface HomeDesktopProps {
   barbershops: Barbershop[];
