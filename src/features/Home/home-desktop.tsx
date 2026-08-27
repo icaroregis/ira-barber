@@ -1,4 +1,4 @@
-import { format, isFuture } from "date-fns";
+import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import SearchBar from "@/components/SearchBar";
 import Header from "@/components/header/header";
@@ -50,11 +50,7 @@ export default function HomeDesktop({
                   {bookings.map((booking) => (
                     <BookingItem
                       key={booking.id}
-                      status={
-                        isFuture(new Date(booking.date))
-                          ? "Confirmado"
-                          : "Finalizado"
-                      }
+                      status={booking.date}
                       serviceName={booking.service.name}
                       barbershopName={booking.service.barbershop.name}
                       barbershopAvatar={booking.service.barbershop.imageUrl}

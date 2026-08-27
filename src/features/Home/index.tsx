@@ -1,10 +1,10 @@
 import { db } from "@/lib/prisma";
 import HomeMobile from "./home-mobile";
 import HomeDesktop from "./home-desktop";
-import { ResponsiveLayout } from "@/components/responsive-layout";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { serializeBooking } from "@/lib/utils";
+import { ResponsiveLayout } from "@/components/responsive-layout";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
