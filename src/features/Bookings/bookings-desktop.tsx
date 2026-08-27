@@ -46,7 +46,7 @@ export default function BookingsDesktop({
                   {confirmedBookings.map((booking) => (
                     <BookingItem
                       key={booking.id}
-                      status="Confirmado"
+                      status={booking.date}
                       serviceName={booking.service.name}
                       barbershopName={booking.service.barbershop.name}
                       barbershopAvatar={booking.service.barbershop.imageUrl}
@@ -74,7 +74,7 @@ export default function BookingsDesktop({
                   {finishedBookings.map((booking) => (
                     <BookingItem
                       key={booking.id}
-                      status="Finalizado"
+                      status={booking.date}
                       serviceName={booking.service.name}
                       barbershopName={booking.service.barbershop.name}
                       barbershopAvatar={booking.service.barbershop.imageUrl}

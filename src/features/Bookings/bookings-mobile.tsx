@@ -28,7 +28,7 @@ export default function BookingsMobile({
             confirmedBookings.map((booking) => (
               <BookingItem
                 key={booking.id}
-                status="Confirmado"
+                status={booking.date}
                 serviceName={booking.service.name}
                 barbershopName={booking.service.barbershop.name}
                 barbershopAvatar={booking.service.barbershop.imageUrl}
@@ -52,7 +52,7 @@ export default function BookingsMobile({
             finishedBookings.map((booking) => (
               <BookingItem
                 key={booking.id}
-                status="Finalizado"
+                status={booking.date}
                 serviceName={booking.service.name}
                 barbershopName={booking.service.barbershop.name}
                 barbershopAvatar={booking.service.barbershop.imageUrl}
