@@ -4,18 +4,23 @@ import SearchBar from "@/components/SearchBar";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/header/header";
 import WelcomeGreeting from "./components/welcome-greeting";
-import BookingsSection from "./components/bookings-section";
 import { BarbershopItem, type Barbershop } from "./components/barbershop-item";
 import { serviceItems } from "@/constants/service-items";
+import { BookingItem } from "@/components/booking-item";
+import { BookingSerialized } from "@/lib/utils";
+import { format } from "date-fns";
+import { ptBR } from "date-fns/locale";
 
 interface HomeMobileProps {
   barbershops: Barbershop[];
   popularBarbershops: Barbershop[];
+  confirmedBookings: BookingSerialized[];
 }
 
 export default function HomeMobile({
   barbershops,
   popularBarbershops,
+  confirmedBookings,
 }: HomeMobileProps) {
   return (
     <div className="flex flex-1 flex-col">
@@ -87,9 +92,31 @@ export default function HomeMobile({
       </div>
 
       {/* AGENDAMENTOS */}
-      <div className="px-5 pt-6 pb-6">
-        <BookingsSection />
-      </div>
+      {confirmedBookings.length > 0 && (
+        <div className="flex flex-col gap-3 px-5 pt-6">
+          <h2 className="text-xs font-bold text-[#838896] uppercase">
+            AGENDAMENTOS
+          </h2>
+
+          <div className="flex gap-3 overflow-x-auto [&::-webkit-scrollbar]:hidden">
+            {confirmedBookings.map((booking) => (
+              <div key={booking.id} className="min-w-[90%] shrink-0">
+                <BookingItem
+                  status="Confirmado"
+                  serviceName={booking.service.name}
+                  barbershopName={booking.service.barbershop.name}
+                  barbershopAvatar={booking.service.barbershop.imageUrl}
+                  month={format(new Date(booking.date), "MMMM", {
+                    locale: ptBR,
+                  })}
+                  day={format(new Date(booking.date), "dd")}
+                  time={format(new Date(booking.date), "HH:mm")}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Recomendados */}
       <div className="flex flex-col gap-3 pt-6 pr-5 pb-6">

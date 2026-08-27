@@ -1,21 +1,26 @@
 import SearchBar from "@/components/SearchBar";
 import Header from "@/components/header/header";
 import WelcomeGreeting from "./components/welcome-greeting";
-import BookingsSection from "./components/bookings-section";
 import { BarbershopItem, type Barbershop } from "./components/barbershop-item";
 import {
   ManualCarousel,
   ManualCarouselItem,
 } from "@/components/manual-carousel";
+import { BookingItem } from "@/components/booking-item";
+import { BookingSerialized } from "@/lib/utils";
+import { format } from "date-fns";
+import { ptBR } from "date-fns/locale";
 
 interface HomeDesktopProps {
   barbershops: Barbershop[];
   popularBarbershops: Barbershop[];
+  confirmedBookings: BookingSerialized[];
 }
 
 export default function HomeDesktop({
   barbershops,
   popularBarbershops,
+  confirmedBookings,
 }: HomeDesktopProps) {
   return (
     <div className="flex flex-1 flex-col bg-[#141518]">
@@ -36,7 +41,27 @@ export default function HomeDesktop({
                 <SearchBar variant="desktop" />
               </div>
 
-              <BookingsSection />
+              {confirmedBookings.length > 0 && (
+                <div className="flex flex-col gap-3">
+                  <h2 className="text-xs font-bold text-[#838896] uppercase">
+                    AGENDAMENTOS
+                  </h2>
+                  {confirmedBookings.map((booking) => (
+                    <BookingItem
+                      key={booking.id}
+                      status="Confirmado"
+                      serviceName={booking.service.name}
+                      barbershopName={booking.service.barbershop.name}
+                      barbershopAvatar={booking.service.barbershop.imageUrl}
+                      month={format(new Date(booking.date), "MMMM", {
+                        locale: ptBR,
+                      })}
+                      day={format(new Date(booking.date), "dd")}
+                      time={format(new Date(booking.date), "HH:mm")}
+                    />
+                  ))}
+                </div>
+              )}
             </div>
 
             {/* DIREITA: Recomendados */}

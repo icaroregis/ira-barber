@@ -26,7 +26,7 @@ export default async function Bookings() {
       },
     },
     orderBy: {
-      date: "asc", // Ordena pela data, os mais próximos primeiro
+      date: "asc",
     },
   });
 
