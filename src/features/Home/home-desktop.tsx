@@ -15,13 +15,13 @@ import {
 interface HomeDesktopProps {
   barbershops: Barbershop[];
   popularBarbershops: Barbershop[];
-  confirmedBookings: BookingSerialized[];
+  bookings: BookingSerialized[];
 }
 
 export default function HomeDesktop({
   barbershops,
   popularBarbershops,
-  confirmedBookings,
+  bookings,
 }: HomeDesktopProps) {
   return (
     <div className="flex flex-1 flex-col bg-[#141518]">
@@ -42,12 +42,12 @@ export default function HomeDesktop({
                 <SearchBar variant="desktop" />
               </div>
 
-              {confirmedBookings.length > 0 && (
+              {bookings.length > 0 && (
                 <div className="flex flex-col gap-3">
                   <h2 className="text-xs font-bold text-[#838896] uppercase">
                     AGENDAMENTOS
                   </h2>
-                  {confirmedBookings.map((booking) => (
+                  {bookings.map((booking) => (
                     <BookingItem
                       key={booking.id}
                       status="Confirmado"

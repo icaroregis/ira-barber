@@ -16,7 +16,7 @@ export default async function Home() {
     },
   });
 
-  const confirmedBookings = session?.user
+  const bookings = session?.user
     ? await db.booking.findMany({
         where: {
           userId: session.user.id,
@@ -37,7 +37,7 @@ export default async function Home() {
       })
     : [];
 
-  const serializedConfirmed = confirmedBookings.map((booking) =>
+  const serializedBookings = bookings.map((booking) =>
     serializeBooking(booking),
   );
 
@@ -48,7 +48,7 @@ export default async function Home() {
           <HomeMobile
             barbershops={barbershops}
             popularBarbershops={popularBarbershops}
-            confirmedBookings={serializedConfirmed}
+            bookings={serializedBookings}
           />
         </div>
       }
@@ -57,7 +57,7 @@ export default async function Home() {
           <HomeDesktop
             barbershops={barbershops}
             popularBarbershops={popularBarbershops}
-            confirmedBookings={serializedConfirmed}
+            bookings={serializedBookings}
           />
         </div>
       }

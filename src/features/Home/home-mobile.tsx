@@ -1,26 +1,26 @@
-import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
+import { format, isFuture } from "date-fns";
+import { ptBR } from "date-fns/locale";
 import SearchBar from "@/components/SearchBar";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/header/header";
+import { BookingSerialized } from "@/lib/utils";
+import { BookingItem } from "@/components/booking-item";
+import { serviceItems } from "@/constants/service-items";
 import WelcomeGreeting from "./components/welcome-greeting";
 import { BarbershopItem, type Barbershop } from "./components/barbershop-item";
-import { serviceItems } from "@/constants/service-items";
-import { BookingItem } from "@/components/booking-item";
-import { BookingSerialized } from "@/lib/utils";
-import { format } from "date-fns";
-import { ptBR } from "date-fns/locale";
 
 interface HomeMobileProps {
   barbershops: Barbershop[];
   popularBarbershops: Barbershop[];
-  confirmedBookings: BookingSerialized[];
+  bookings: BookingSerialized[];
 }
 
 export default function HomeMobile({
   barbershops,
   popularBarbershops,
-  confirmedBookings,
+  bookings,
 }: HomeMobileProps) {
   return (
     <div className="flex flex-1 flex-col">
@@ -92,17 +92,17 @@ export default function HomeMobile({
       </div>
 
       {/* AGENDAMENTOS */}
-      {confirmedBookings.length > 0 && (
+      {bookings.length > 0 && (
         <div className="flex flex-col gap-3 px-5 pt-6">
           <h2 className="text-xs font-bold text-[#838896] uppercase">
             AGENDAMENTOS
           </h2>
 
           <div className="flex gap-3 overflow-x-auto [&::-webkit-scrollbar]:hidden">
-            {confirmedBookings.map((booking) => (
+            {bookings.map((booking) => (
               <div key={booking.id} className="min-w-[90%] shrink-0">
                 <BookingItem
-                  status="Confirmado"
+                  status={isFuture(booking.date) ? "Confirmado" : "Concluído"}
                   serviceName={booking.service.name}
                   barbershopName={booking.service.barbershop.name}
                   barbershopAvatar={booking.service.barbershop.imageUrl}
