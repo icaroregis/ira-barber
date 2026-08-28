@@ -33,12 +33,16 @@ export default function HeaderDesktop() {
         {isAuthenticated ? (
           <>
             <Button
+              asChild
               variant="ghost"
               className="hover:text-primary flex items-center gap-2 text-sm font-bold text-white hover:bg-transparent"
             >
-              <CalendarIcon size={16} />
-              Agendamentos
+              <Link href="/bookings">
+                <CalendarIcon size={16} />
+                Agendamentos
+              </Link>
             </Button>
+
             <SidebarSheet>
               <button
                 type="button"

@@ -132,7 +132,7 @@ export default function BookingsMobile({
             <div className="flex flex-col gap-6 px-5 py-6">
               <div className="relative flex h-45 w-full items-end overflow-hidden rounded-xl bg-[#26272B]">
                 <Image
-                  src="https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=dark%20themed%20city%20map%20with%20a%20location%20pin&image_size=landscape_4_3"
+                  src="/maps.png"
                   alt="Mapa"
                   fill
                   sizes="100vw"

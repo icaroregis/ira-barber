@@ -99,7 +99,7 @@ export default function BarbershopDetailsDesktop({
                 {/* MAP PLACEHOLDER */}
                 <div className="relative flex h-[180px] w-full items-end overflow-hidden rounded-xl bg-[#26272B]">
                   <Image
-                    src="https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=dark%20themed%20city%20map%20with%20a%20location%20pin&image_size=landscape_4_3"
+                    src="/maps.png"
                     alt="Mapa"
                     fill
                     sizes="(max-width: 1440px) 100vw, 450px"
