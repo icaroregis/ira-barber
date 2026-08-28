@@ -272,15 +272,22 @@ export function BookingSheet({
 
         {/* Rodapé fixo na parte inferior */}
         <SheetFooter className="m-0 shrink-0 px-5 pt-6 pb-6">
-          <SheetClose asChild>
-            <Button
-              className="bg-primary w-full font-bold text-white"
-              disabled={!date || !time}
-              onClick={handleCreateBooking}
-            >
-              Confirmar reserva
-            </Button>
-          </SheetClose>
+          <div className="flex w-full flex-col gap-3">
+            <SheetClose asChild>
+              <Button variant="outline" className="w-full font-bold">
+                Voltar
+              </Button>
+            </SheetClose>
+            <SheetClose asChild>
+              <Button
+                className="bg-primary w-full font-bold text-white"
+                disabled={!date || !time}
+                onClick={handleCreateBooking}
+              >
+                Confirmar reserva
+              </Button>
+            </SheetClose>
+          </div>
         </SheetFooter>
       </SheetContent>
     </Sheet>
