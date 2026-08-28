@@ -8,10 +8,10 @@ import { format, isFuture } from "date-fns";
 import { Badge } from "@/components/ui/badge";
 import { BookingSerialized } from "@/lib/utils";
 import Header from "@/components/header/header";
-import { Button } from "@/components/ui/button";
 import { BookingItem } from "@/components/booking-item";
 import { Card, CardContent } from "@/components/ui/card";
 import { CopyPhoneItem } from "../BarbershopDetails/components/copy-phone-item";
+import { CancelBookingButton } from "./components/cancel-booking-button";
 
 interface BookingsDesktopProps {
   confirmedBookings: BookingSerialized[];
@@ -210,9 +210,11 @@ export default function BookingsDesktop({
 
                   {/* CANCEL BUTTON */}
                   {isFuture(new Date(selectedBooking.date)) && (
-                    <Button variant="destructive" className="w-full font-bold">
-                      Cancelar Reserva
-                    </Button>
+                    <CancelBookingButton
+                      bookingId={selectedBooking.id}
+                      className="w-full font-bold"
+                      onSuccess={() => setSelectedBooking(null)}
+                    />
                   )}
                 </div>
               </div>

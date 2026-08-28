@@ -12,6 +12,7 @@ import { BookingItem } from "@/components/booking-item";
 import { BookingSerialized } from "@/lib/utils";
 import { Card, CardContent } from "@/components/ui/card";
 import { CopyPhoneItem } from "../BarbershopDetails/components/copy-phone-item";
+import { CancelBookingButton } from "./components/cancel-booking-button";
 
 import {
   Sheet,
@@ -228,9 +229,14 @@ export default function BookingsMobile({
               </Card>
 
               {isFuture(new Date(selectedBooking.date)) && (
-                <Button variant="destructive" className="w-full font-bold">
-                  Cancelar Reserva
-                </Button>
+                <CancelBookingButton
+                  bookingId={selectedBooking.id}
+                  className="w-full font-bold"
+                  onSuccess={() => {
+                    setIsDetailsOpen(false);
+                    setSelectedBooking(null);
+                  }}
+                />
               )}
             </div>
           )}
