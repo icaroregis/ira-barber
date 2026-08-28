@@ -174,27 +174,18 @@ pnpm lint
 
 ## Screenshots do projeto
 
-> Observacao: os screenshots anexados na conversa nao foram gravados automaticamente no workspace. O README ja ficou preparado para exibi-los assim que eles forem salvos em `docs/screenshots/` com os nomes abaixo.
-
-### Sugestao de nomes para os arquivos
-
-- `docs/screenshots/home-mobile.png`
-- `docs/screenshots/bookings-mobile.png`
-- `docs/screenshots/home-desktop.png`
-- `docs/screenshots/bookings-details-desktop.png`
-
-### Galeria
-
 <p align="center">
-  <img src="docs/screenshots/home-mobile.png" alt="Tela inicial mobile" width="24%" />
-  <img src="docs/screenshots/bookings-mobile.png" alt="Tela de agendamentos mobile" width="24%" />
-  <img src="docs/screenshots/home-desktop.png" alt="Tela inicial desktop" width="24%" />
-  <img src="docs/screenshots/bookings-details-desktop.png" alt="Detalhes do agendamento no desktop" width="24%" />
+  <img src="public/mobile-1.jpeg" alt="Tela inicial mobile" width="24%" />
+  <img src="public/mobile-2.jpeg" alt="Tela de agendamentos mobile" width="24%" />
+  <img src="public/desktop-1.jpeg" alt="Tela inicial desktop" width="48%" />
+</p>
+<p align="center">
+  <img src="public/desktop-2.jpeg" alt="Detalhes do agendamento no desktop" width="98%" />
 </p>
 
 ## Link para o deploy
 
-Nao encontrei um link de deploy configurado no repositorio ate o momento. Se voce publicar o projeto, vale adicionar aqui a URL final.
+A aplicação está disponível em: [https://ira-barber.vercel.app](https://ira-barber.vercel.app)
 
 ## Desafios enfrentados e como foram resolvidos
 
