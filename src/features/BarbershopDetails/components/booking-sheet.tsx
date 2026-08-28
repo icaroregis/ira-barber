@@ -168,106 +168,110 @@ export function BookingSheet({
   return (
     <Sheet open={isOpen} onOpenChange={handleOpenChange}>
       <SheetTrigger asChild>{children}</SheetTrigger>
-      <SheetContent className="min-w-[350px] overflow-y-auto border-l border-[#26272B] bg-[#141518] px-0 py-6">
+      <SheetContent className="flex max-h-screen min-w-[350px] flex-col border-l border-[#26272B] bg-[#141518] px-0 py-6">
         <SheetHeader className="border-b border-[#26272B] px-5 pb-6 text-left">
           <SheetTitle className="text-lg font-bold text-white">
             Fazer Reserva
           </SheetTitle>
         </SheetHeader>
 
-        {/* Calendário */}
-        <div className="border-b border-[#26272B]">
-          <Calendar
-            mode="single"
-            selected={date}
-            onSelect={handleDateSelect}
-            disabled={{ before: startOfToday() }}
-            locale={ptBR}
-            classNames={{
-              weekday:
-                "w-full text-center text-[0.8rem] font-normal capitalize text-[#838896]",
-              day: "w-full",
-              caption_label: "capitalize text-sm font-medium",
-            }}
-          />
-        </div>
-
-        {/* Lista de horários */}
-        {date && (
-          <div className="flex gap-3 overflow-x-auto overflow-y-hidden border-b border-[#26272B] pb-4 pl-5 [&::-webkit-scrollbar]:hidden">
-            <div className="flex gap-3">
-              {availableTimeSlots.map(({ value, isBooked }) => (
-                <Button
-                  key={value}
-                  variant={time === value ? "default" : "outline"}
-                  className={`shrink-0 rounded-full ${
-                    isBooked
-                      ? "cursor-not-allowed border-[#26272B] bg-[#1A1B1F] text-[#838896] opacity-50 hover:bg-[#1A1B1F] hover:text-[#838896]"
-                      : time === value
-                        ? "bg-primary text-white"
-                        : "border-[#26272B] bg-transparent text-white hover:bg-[#26272B] hover:text-white"
-                  }`}
-                  disabled={isLoadingBookings || isBooked}
-                  onClick={() => setTime(value)}
-                >
-                  {value}
-                </Button>
-              ))}
-            </div>
+        {/* Área de Conteúdo Rolável (Ocupa o meio e gera scroll se precisar) */}
+        <div className="flex flex-1 flex-col overflow-y-auto">
+          {/* Calendário */}
+          <div className="shrink-0 border-b border-[#26272B]">
+            <Calendar
+              mode="single"
+              selected={date}
+              onSelect={handleDateSelect}
+              disabled={{ before: startOfToday() }}
+              locale={ptBR}
+              classNames={{
+                weekday:
+                  "w-full text-center text-[0.8rem] font-normal capitalize text-[#838896]",
+                day: "w-full",
+                caption_label: "capitalize text-sm font-medium",
+              }}
+            />
           </div>
-        )}
 
-        {date &&
-          !isLoadingBookings &&
-          availableTimeSlots.every(({ isBooked }) => isBooked) && (
-            <div className="border-b border-[#26272B] px-5 py-4">
-              <p className="text-sm text-[#838896]">
-                Todos os horários desse dia já estão reservados.
-              </p>
+          {/* Lista de horários */}
+          {date && (
+            <div className="flex shrink-0 gap-3 overflow-x-auto overflow-y-hidden border-b border-[#26272B] px-5 py-5 [&::-webkit-scrollbar]:hidden">
+              <div className="flex items-center gap-3">
+                {availableTimeSlots.map(({ value, isBooked }) => (
+                  <Button
+                    key={value}
+                    variant={time === value ? "default" : "outline"}
+                    className={`shrink-0 rounded-full ${
+                      isBooked
+                        ? "cursor-not-allowed border-[#26272B] bg-[#1A1B1F] text-[#838896] opacity-50 hover:bg-[#1A1B1F] hover:text-[#838896]"
+                        : time === value
+                          ? "bg-primary text-white"
+                          : "border-[#26272B] bg-transparent text-white hover:bg-[#26272B] hover:text-white"
+                    }`}
+                    disabled={isLoadingBookings || isBooked}
+                    onClick={() => setTime(value)}
+                  >
+                    {value}
+                  </Button>
+                ))}
+              </div>
             </div>
           )}
 
-        {/* Resumo da reserva */}
-        <div className="p-5">
-          <Card className="border-[#26272B] bg-[#1A1B1F]">
-            <CardContent className="flex flex-col gap-3 p-3">
-              <div className="flex items-center justify-between">
-                <h2 className="font-bold text-white">{service.name}</h2>
-                <p className="text-sm font-bold text-white">
-                  {Intl.NumberFormat("pt-BR", {
-                    style: "currency",
-                    currency: "BRL",
-                  }).format(Number(service.price))}
+          {date &&
+            !isLoadingBookings &&
+            availableTimeSlots.every(({ isBooked }) => isBooked) && (
+              <div className="shrink-0 border-b border-[#26272B] px-5 py-4">
+                <p className="text-sm text-[#838896]">
+                  Todos os horários desse dia já estão reservados.
                 </p>
               </div>
+            )}
 
-              {date && (
+          {/* Resumo da reserva */}
+          <div className="shrink-0 p-5">
+            <Card className="border-[#26272B] bg-[#1A1B1F]">
+              <CardContent className="flex flex-col gap-3 p-3">
                 <div className="flex items-center justify-between">
-                  <h3 className="text-sm text-[#838896]">Data</h3>
-                  <p className="text-sm text-white">
-                    {format(date, "dd 'de' MMMM", { locale: ptBR })}
+                  <h2 className="font-bold text-white">{service.name}</h2>
+                  <p className="text-sm font-bold text-white">
+                    {Intl.NumberFormat("pt-BR", {
+                      style: "currency",
+                      currency: "BRL",
+                    }).format(Number(service.price))}
                   </p>
                 </div>
-              )}
 
-              {time && (
+                {date && (
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-sm text-[#838896]">Data</h3>
+                    <p className="text-sm text-white">
+                      {format(date, "dd 'de' MMMM", { locale: ptBR })}
+                    </p>
+                  </div>
+                )}
+
+                {time && (
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-sm text-[#838896]">Horário</h3>
+                    <p className="text-sm text-white">{time}</p>
+                  </div>
+                )}
+
                 <div className="flex items-center justify-between">
-                  <h3 className="text-sm text-[#838896]">Horário</h3>
-                  <p className="text-sm text-white">{time}</p>
+                  <h3 className="text-sm text-[#838896]">Barbearia</h3>
+                  <p className="max-w-[150px] truncate text-sm text-white">
+                    {barbershop.name}
+                  </p>
                 </div>
-              )}
-
-              <div className="flex items-center justify-between">
-                <h3 className="text-sm text-[#838896]">Barbearia</h3>
-                <p className="max-w-[150px] truncate text-sm text-white">
-                  {barbershop.name}
-                </p>
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+          </div>
         </div>
 
-        <SheetFooter className="m-0 px-5 pb-6">
+        {/* Rodapé fixo na parte inferior */}
+        <SheetFooter className="m-0 shrink-0 px-5 pt-6 pb-6">
           <SheetClose asChild>
             <Button
               className="bg-primary w-full font-bold text-white"
