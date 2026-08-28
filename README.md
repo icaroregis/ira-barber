@@ -1,52 +1,138 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# IRA Barber
 
-## Getting Started
+Aplicação web para agendamento de serviços em barbearias, com foco em uma experiencia responsiva para desktop e mobile. O projeto permite autenticação com Google, visualização de barbearias recomendadas, busca por estabelecimentos, reserva de horarios e gerenciamento dos agendamentos do usuario.
 
-First, run the development server:
+## O que o projeto faz
+
+O **IRA Barber** foi desenvolvido para simular o fluxo de agendamento em uma barbearia moderna. Entre as principais funcionalidades, estao:
+
+- login com conta Google;
+- listagem de barbearias recomendadas e populares;
+- busca de barbearias por nome;
+- visualizacao de detalhes da barbearia e dos servicos disponiveis;
+- criacao de agendamentos;
+- listagem de agendamentos confirmados e finalizados;
+- cancelamento de reservas futuras;
+- interface adaptada para mobile e desktop.
+
+## Tecnologias utilizadas
+
+- **Next.js 16** com App Router
+- **React 19**
+- **TypeScript**
+- **Tailwind CSS 4**
+- **Prisma ORM**
+- **PostgreSQL**
+- **NextAuth.js** para autenticacao
+- **React Hook Form + Zod** para formularios e validacao
+- **date-fns** para manipulacao de datas
+- **Radix UI / shadcn/ui** para componentes de interface
+- **Docker Compose** para subir o banco localmente
+
+## Como instalar e rodar localmente
+
+### 1. Clone o repositorio
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+git clone git@github.com:icaroregis/ira-barber.git
+cd ira-barber
+```
+
+### 2. Instale as dependencias
+
+```bash
+pnpm install
+```
+
+### 3. Configure as variaveis de ambiente
+
+Crie um arquivo `.env` na raiz do projeto com as variaveis abaixo:
+
+```env
+DATABASE_URL="postgresql://SEU_USUARIO:SUA_SENHA@localhost:5432/ira-barber?schema=public"
+GOOGLE_CLIENT_ID="seu_google_client_id"
+GOOGLE_CLIENT_SECRET="seu_google_client_secret"
+NEXTAUTH_SECRET="seu_nextauth_secret"
+NEXTAUTH_URL="http://localhost:3000"
+```
+
+### 4. Suba o banco de dados com Docker
+
+```bash
+docker compose up -d
+```
+
+### 5. Aplique as migrations
+
+```bash
+pnpm dlx prisma migrate dev
+```
+
+### 6. Popule o banco com dados iniciais
+
+```bash
+pnpm ts-node prisma/seed.ts
+```
+
+### 7. Rode a aplicacao
+
+```bash
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Depois disso, acesse:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```text
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Configurando o Prisma
+## Scripts disponiveis
 
 ```bash
-# 1. Instala a CLI do Prisma como ferramenta de desenvolvimento (nao vai para o codigo final)
-pnpm add -D prisma
-
-# 2. Instala o client que sera usado no codigo para consultar o banco (vai para producao)
-pnpm add @prisma/client
-
-# 3. Cria a estrutura inicial do Prisma, como a pasta prisma e o arquivo .env
-pnpm dlx prisma init --datasource-provider postgresql
-
-# 4. Cria e aplica a primeira migration no banco com base no schema atual
-pnpm dlx prisma migrate dev --name init
+pnpm dev
+pnpm build
+pnpm start
+pnpm lint
 ```
 
-## Learn More
+## Screenshots do projeto
 
-To learn more about Next.js, take a look at the following resources:
+> Observacao: os screenshots anexados na conversa nao foram gravados automaticamente no workspace. O README ja ficou preparado para exibi-los assim que eles forem salvos em `docs/screenshots/` com os nomes abaixo.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Sugestao de nomes para os arquivos
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `docs/screenshots/home-mobile.png`
+- `docs/screenshots/bookings-mobile.png`
+- `docs/screenshots/home-desktop.png`
+- `docs/screenshots/bookings-details-desktop.png`
 
-## Deploy on Vercel
+### Galeria
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+<p align="center">
+  <img src="docs/screenshots/home-mobile.png" alt="Tela inicial mobile" width="24%" />
+  <img src="docs/screenshots/bookings-mobile.png" alt="Tela de agendamentos mobile" width="24%" />
+  <img src="docs/screenshots/home-desktop.png" alt="Tela inicial desktop" width="24%" />
+  <img src="docs/screenshots/bookings-details-desktop.png" alt="Detalhes do agendamento no desktop" width="24%" />
+</p>
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Link para o deploy
+
+Nao encontrei um link de deploy configurado no repositorio ate o momento. Se voce publicar o projeto, vale adicionar aqui a URL final.
+
+## Desafios enfrentados e como foram resolvidos
+
+### 1. Responsividade entre mobile e desktop
+
+O projeto precisou entregar uma experiencia consistente em telas bem diferentes. Isso foi resolvido separando as versoes mobile e desktop das principais features, enquanto um layout responsivo decide qual interface renderizar.
+
+### 2. Autenticacao com persistencia de usuario
+
+Foi necessario integrar login social sem complicar a experiencia do usuario. A combinacao de **NextAuth.js** com **Prisma Adapter** resolveu a autenticacao com Google e a persistencia das sessoes no banco.
+
+### 3. Regras de negocio para agendamentos
+
+Um ponto importante era evitar conflitos de horario e impedir acoes invalidas. Para isso, a aplicacao valida horarios ja reservados antes de criar um agendamento e permite cancelar apenas reservas futuras.
+
+### 4. Organizacao dos dados no servidor
+
+A listagem de agendamentos confirmados e finalizados precisava ser confiavel e performatica. A solucao foi buscar os dados no servidor, ordenar por data e separar os registros entre futuros e passados antes da renderizacao.
