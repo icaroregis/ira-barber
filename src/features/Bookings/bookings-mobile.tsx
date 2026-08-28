@@ -109,7 +109,7 @@ export default function BookingsMobile({
       <Sheet open={isDetailsOpen} onOpenChange={handleDetailsOpenChange}>
         <SheetContent
           side="right"
-          className="h-screen w-87.5 max-w-[calc(100vw-40px)] gap-0 overflow-y-auto border-[#26272B] bg-[#141518] px-0 py-0"
+          className="h-[100dvh] w-87.5 max-w-[calc(100vw-40px)] gap-0 overflow-y-auto border-[#26272B] bg-[#141518] px-0 py-0"
         >
           <SheetHeader className="sticky top-0 z-10 border-b border-[#26272B] bg-[#141518] px-5 py-4 text-left">
             <div className="flex items-center justify-between">
@@ -130,7 +130,7 @@ export default function BookingsMobile({
           </SheetHeader>
 
           {selectedBooking && (
-            <div className="flex flex-col gap-6 px-5 py-6">
+            <div className="flex flex-col gap-6 px-5 pt-6 pb-12">
               <div className="relative flex h-45 w-full items-end overflow-hidden rounded-xl bg-[#26272B]">
                 <Image
                   src="/maps.png"
