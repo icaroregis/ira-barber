@@ -29,6 +29,83 @@ O **IRA Barber** foi desenvolvido para simular o fluxo de agendamento em uma bar
 - **Radix UI / shadcn/ui** para componentes de interface
 - **Docker Compose** para subir o banco localmente
 
+## Arquitetura do projeto
+
+Uma decisao de arquitetura deste projeto foi manter as **rotas do App Router o mais enxutas possivel**. Em vez de concentrar regra de negocio, busca de dados e composicao de interface dentro de `page.tsx`, cada rota funciona como um ponto de entrada simples que apenas delega a responsabilidade para um modulo da pasta `src/features`.
+
+Na pratica, a ideia e:
+
+- a pasta `src/app` cuida das rotas;
+- a pasta `src/features` concentra a implementacao de cada modulo de tela;
+- cada feature pode ter seu proprio `index.tsx`, versoes `mobile` e `desktop` e componentes internos;
+- componentes compartilhados ficam em `src/components`.
+
+### Exemplo do padrao
+
+A rota de detalhes da barbearia fica bem pequena e apenas encaminha o `id` para a feature:
+
+```tsx
+import BarbershopDetails from "@/features/BarbershopDetails";
+
+interface BarbershopDetailPageProps {
+  params: Promise<{ id: string }>;
+}
+
+export default async function BarbershopDetail({
+  params,
+}: BarbershopDetailPageProps) {
+  const { id } = await params;
+  return <BarbershopDetails id={id} />;
+}
+```
+
+O mesmo acontece com a rota de agendamentos:
+
+```tsx
+import Bookings from "@/features/Bookings";
+
+export default function BookingsPage() {
+  return <Bookings />;
+}
+```
+
+Enquanto isso, a feature e quem realmente orquestra a tela, busca dados no servidor e decide o que renderizar em cada breakpoint.
+
+### Estrutura resumida
+
+```text
+src/
+  app/
+    page.tsx
+    bookings/page.tsx
+    barbershopDetails/[id]/page.tsx
+    searchForBarbershops/page.tsx
+  features/
+    Home/
+      index.tsx
+      home-mobile.tsx
+      home-desktop.tsx
+      components/
+    Bookings/
+      index.tsx
+      bookings-mobile.tsx
+      bookings-desktop.tsx
+      components/
+    BarbershopDetails/
+      index.tsx
+      barbershop-details-mobile.tsx
+      barbershop-details-desktop.tsx
+      components/
+```
+
+### Beneficios dessa abordagem
+
+- deixa as rotas mais limpas e faceis de ler;
+- facilita a manutencao e a evolucao de cada tela;
+- melhora a separacao de responsabilidades;
+- ajuda a reutilizar componentes internos por contexto de feature;
+- reduz o acoplamento entre estrutura de rota e implementacao da interface.
+
 ## Como instalar e rodar localmente
 
 ### 1. Clone o repositorio
