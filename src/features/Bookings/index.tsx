@@ -4,6 +4,7 @@ import { getServerSession } from "next-auth";
 import BookingsMobile from "./bookings-mobile";
 import { serializeBooking } from "@/lib/utils";
 import BookingsDesktop from "./bookings-desktop";
+import NotAuthenticated from "@/components/not-authenticated";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { ResponsiveLayout } from "@/components/responsive-layout";
 
@@ -11,7 +12,7 @@ export default async function Bookings() {
   const session = await getServerSession(authOptions);
 
   if (!session?.user) {
-    return <div>Usuário não autenticado</div>;
+    return <NotAuthenticated />;
   }
 
   const bookings = await db.booking.findMany({
